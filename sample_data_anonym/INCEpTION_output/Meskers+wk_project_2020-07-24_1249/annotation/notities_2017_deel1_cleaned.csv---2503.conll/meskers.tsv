@@ -1,0 +1,42 @@
+#FORMAT=WebAnno TSV 3.2		
+		
+		
+#Text=NF : Pijn in de rug , verlicht met warme handdoek en pcm .		
+1-1	0-2	NF
+1-2	3-4	:
+1-3	5-9	Pijn
+1-4	10-12	in
+1-5	13-15	de
+1-6	16-19	rug
+1-7	20-21	,
+1-8	22-30	verlicht
+1-9	31-34	met
+1-10	35-40	warme
+1-11	41-49	handdoek
+1-12	50-52	en
+1-13	53-56	pcm
+1-14	57-58	.
+		
+#Text=Mw was emotioneel , schoonzoon hoort morgen de uitslag van een aantal onderzoeken en mw maakt zich hier veel zorgen om .		
+2-1	464-466	Mw
+2-2	467-470	was
+2-3	471-481	emotioneel
+2-4	482-483	,
+2-5	484-494	schoonzoon
+2-6	495-500	hoort
+2-7	501-507	morgen
+2-8	508-510	de
+2-9	511-518	uitslag
+2-10	519-522	van
+2-11	523-526	een
+2-12	527-533	aantal
+2-13	534-545	onderzoeken
+2-14	546-548	en
+2-15	549-551	mw
+2-16	552-557	maakt
+2-17	558-562	zich
+2-18	563-567	hier
+2-19	568-572	veel
+2-20	573-579	zorgen
+2-21	580-582	om
+2-22	583-584	.
