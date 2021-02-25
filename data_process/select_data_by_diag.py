@@ -25,7 +25,7 @@ outpath.mkdir(exist_ok=True, parents=True)
 ### LOAD NOTES ###
 print(f"Loading all 'Notities' files from {datapath}...")
 
-cols = ['MDN',  'NotitieID',  'NotitieCSN', 'Typenotitie',  'Notitiedatum', 'Notitietekst1', 'Notitietekst2', 'Notitietekst3']
+cols = ['MDN', 'NotitieID', 'NotitieCSN', 'Typenotitie', 'Notitiedatum', 'Notitietekst1', 'Notitietekst2', 'Notitietekst3']
 amc = pd.concat(pd.read_csv(f, sep=';', names=cols, encoding='utf-8-sig') for f in datapath.glob('Notities AMC*.csv'))
 vumc = pd.concat(pd.read_csv(f, sep=';', names=cols, encoding='utf-8-sig') for f in datapath.glob('Notities VUMC*.csv'))
 
