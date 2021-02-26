@@ -48,24 +48,21 @@ print(f"DataFrames loaded: {diag_amc.shape=}, {diag_vumc.shape=}")
 diag_code = args.icd10.split()[-1]
 query = f"ICD10_diagnose == '{args.icd10}'"
 
-# AMC
-# select
-amc_notes_diag = amc.loc[amc.MDN.isin(diag_amc.query(query).MDN.unique())]
-# save
-outfile = outpath / f"amc_{diag_code}_2020_q1_q2_q3.csv"
-amc_notes_diag.to_csv(outfile, index_label='idx_source_file')
+def select_notes(df, diag_df, query):
+    crit = df.MDN.isin(diag_df.query(query).MDN.unique())
+    subset = ['NotitieID', 'Notitietekst1', 'Notitietekst2', 'Notitietekst3']
+    return df.loc[crit].drop_duplicates(subset=subset, keep='first')
 
-print(f"Number patients with {diag_code} diagnosis in AMC: {diag_amc.query(query).MDN.nunique()}")
-print(f"Number notes belonging to these patients: {amc_notes_diag.shape[0]}")
-print(f"Selection saved to {outfile}")
+def save_results(hospital, df, diag_code):
+    outfile = outpath / f"{hospital}_{diag_code}_2020_q1_q2_q3.csv"
+    df.to_csv(outfile, index_label='idx_source_file')
+    print(f"Number patients with {diag_code} diagnosis in {hospital}: {df.MDN.nunique()}")
+    print(f"Number notes belonging to these patients: {df.NotitieID.nunique()}")
+    print(f"Selection saved to {outfile}")
+    return None
 
-# VUMC
-#select
-vumc_notes_diag = vumc.loc[vumc.MDN.isin(diag_vumc.query(query).MDN.unique())]
-# save
-outfile = outpath / f"vumc_{diag_code}_2020_q1_q2_q3.csv"
-vumc_notes_diag.to_csv(outfile, index_label='idx_source_file')
+amc_notes_diag = select_notes(amc, diag_amc, query)
+save_results('amc', amc_notes_diag, diag_code)
 
-print(f"Number patients with {diag_code} diagnosis in VUMC: {diag_vumc.query(query).MDN.nunique()}")
-print(f"Number notes belonging to these patients: {vumc_notes_diag.shape[0]}")
-print(f"Selection saved to {outfile}")
+vumc_notes_diag = select_notes(vumc, diag_vumc, query)
+save_results('vumc', vumc_notes_diag, diag_code)
