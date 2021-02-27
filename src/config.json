@@ -1,0 +1,19 @@
+{
+    "paths": {
+        "data": {
+            "2017": {
+                "root": "../Non_covid_data_15oct",
+                "raw": "../Non_covid_data_15oct/raw",
+                "to_inception_conll": "../Non_covid_data_15oct/to_inception_conll",
+                "from_inception_tsv": "../Non_covid_data_15oct/from_inception_tsv"
+            },
+            "2020": {
+                "root": "../Covid_data_11nov",
+                "raw": "../Covid_data_11nov/raw",
+                "to_inception_conll": "../Covid_data_11nov/to_inception_conll",
+                "from_inception_tsv": "../Covid_data_11nov/from_inception_tsv"
+            }
+        },
+        "tagsets": "./tagsets"
+    }
+}

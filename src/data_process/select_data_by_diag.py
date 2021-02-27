@@ -7,11 +7,13 @@ import argparse
 import pandas as pd
 from pathlib import Path
 
+from src.config import ROOT, PATHS
+
 
 ### ARGUMENTS ###
 argparser = argparse.ArgumentParser()
-argparser.add_argument('--datapath', default='../../Covid_data_11nov/raw/')
-argparser.add_argument('--outpath', default='../../Covid_data_11nov/raw/ICD_U07.1/a-proof-zonmw/')
+argparser.add_argument('--datapath', default=ROOT/PATHS['2020']['raw'])
+argparser.add_argument('--outpath', default=ROOT/PATHS['2020']['raw']/'ICD_U07.1/a-proof-zonmw/')
 argparser.add_argument('--icd10', default='COVID-19, virus geïdentificeerd [U07.1]')
 args = argparser.parse_args()
 

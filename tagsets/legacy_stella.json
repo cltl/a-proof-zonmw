@@ -1,0 +1,116 @@
+{
+  "name" : "WHO ICF",
+  "typeUiName" : null,
+  "description" : "Domeinen (lopen, inspanningstolerantie, Beroep en werk, stemming); gradaties (laag, middel, hoog en FAC0-FAC5); overige tags.",
+  "language" : null,
+  "type" : null,
+  "type_name" : null,
+  "type_description" : null,
+  "tags" : [ {
+    "tag_name" : ".B152: Stemming",
+    "tag_description" : "Specifieke mentale functies gerelateerd aan het gevoel en aan de affectieve componenten van mentale processen."
+  }, {
+    "tag_name" : ".B455: Inspanningstolerantie",
+    "tag_description" : null
+  }, {
+    "tag_name" : ".D450: Lopen en zich verplaatsen",
+    "tag_description" : "Stappen en zich verplaatsen"
+  }, {
+    "tag_name" : ".D840-859: Beroep en werk",
+    "tag_description" : null
+  }, {
+    "tag_name" : "BER 0",
+    "tag_description" : null
+  }, {
+    "tag_name" : "BER 1",
+    "tag_description" : null
+  }, {
+    "tag_name" : "BER 2",
+    "tag_description" : null
+  }, {
+    "tag_name" : "BER 3",
+    "tag_description" : null
+  }, {
+    "tag_name" : "BER 4",
+    "tag_description" : null
+  }, {
+    "tag_name" : "FAC 0",
+    "tag_description" : "Niet of niet functioneel:\r\nDe patient kan niet lopen en heeft hierbij hulp nodig van twee of meer personen."
+  }, {
+    "tag_name" : "FAC 1",
+    "tag_description" : "Afhankelijk:\r\nDe patient heeft continu stevige ondersteuning nodig van een persoon om het gewicht te dragen en de balans te houden."
+  }, {
+    "tag_name" : "FAC 2",
+    "tag_description" : "Afhankelijk:\r\nDe patient heeft voortdurend of met tussenpozen hulp nodig bij het bewaren van de balans of de coordinatie."
+  }, {
+    "tag_name" : "FAC 3",
+    "tag_description" : "Supervisie:\r\nDe patient heeft voor de veiigheid supervisie nodig van een persoon en behoeft hooguit verbale begeleiding tijdens het lopen. De patient heeft echter geen fysiek contact nodig om te kunnen lopen."
+  }, {
+    "tag_name" : "FAC 4",
+    "tag_description" : "Onafhankelijk; beperkt:\r\nDe patient kan zelfstandig lopen op een vlakke ondergrond, maar kan niet veilig traplopen, hellingen nemen of op oneffen ondergronden lopen."
+  }, {
+    "tag_name" : "FAC 5",
+    "tag_description" : "onafhankelijk; onbeperkt:\r\nDe patient kan zelfstandig lopen op een vlakke ondergrond, op oneffen ondergrond, op hellingen en kan traplopen"
+  }, {
+    "tag_name" : "INS 0",
+    "tag_description" : null
+  }, {
+    "tag_name" : "INS 1",
+    "tag_description" : "Geen problemen"
+  }, {
+    "tag_name" : "INS 2",
+    "tag_description" : null
+  }, {
+    "tag_name" : "INS 3",
+    "tag_description" : null
+  }, {
+    "tag_name" : "INS 4",
+    "tag_description" : null
+  }, {
+    "tag_name" : "INS 5",
+    "tag_description" : null
+  }, {
+    "tag_name" : "STM 0",
+    "tag_description" : null
+  }, {
+    "tag_name" : "STM 1",
+    "tag_description" : null
+  }, {
+    "tag_name" : "STM 2",
+    "tag_description" : null
+  }, {
+    "tag_name" : "STM 3",
+    "tag_description" : null
+  }, {
+    "tag_name" : "STM 4",
+    "tag_description" : null
+  }, {
+    "tag_name" : "disregard_file",
+    "tag_description" : null
+  }, {
+    "tag_name" : "info_Third party",
+    "tag_description" : null
+  }, {
+    "tag_name" : "lop_hulpmiddel",
+    "tag_description" : null
+  }, {
+    "tag_name" : "stm_reaction",
+    "tag_description" : null
+  }, {
+    "tag_name" : "target",
+    "tag_description" : null
+  }, {
+    "tag_name" : "type_Background",
+    "tag_description" : "Achtergrond informatie of informatie over een situatie die nu niet meer van toepassing is."
+  }, {
+    "tag_name" : "type_Implicit",
+    "tag_description" : "Domein of gradatie wordt impliciet beschreven."
+  }, {
+    "tag_name" : "view_Patient",
+    "tag_description" : "De gradatie en/of het domein wordt beschreven door de patient."
+  }, {
+    "tag_name" : "view_Third party",
+    "tag_description" : "De gradatie en/of het domein wordt beschreven door een derde persoon, bijvoorbeeld de partner of een ouder."
+  } ],
+  "create_tag" : false
+}
