@@ -252,7 +252,7 @@ def main(batch_dir, outfile, legacy_parser=None, path_to_raw=None):
 if __name__ == '__main__':
 
     argparser = argparse.ArgumentParser()
-    argparser.add_argument('--batch_dir', default=ROOT/PATHS['2020']['from_inception_tsv']/'Inception_Output_CovidBatch')
+    argparser.add_argument('--batch_dir', default=ROOT/PATHS['data']['2020']['from_inception_tsv']/'Inception_Output_CovidBatch')
     argparser.add_argument('--outfile', default='annotated_df_CovidBatch_pilot.pkl')
     argparser.add_argument('--legacy_parser', default='legacy_stella')
     argparser.add_argument('--path_to_raw')
