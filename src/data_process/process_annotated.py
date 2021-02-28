@@ -28,8 +28,6 @@ import pandas as pd
 from pathlib import Path
 from functools import partial
 
-from src.config import ROOT, PATHS
-
 
 def filename_parser(tsv):
     """
@@ -239,7 +237,7 @@ def main(batch_dir, outfile, legacy_parser=None, path_to_raw=None):
     
     # process tsv files in all subdirectories of batch_dir
     print(f"Processing tsv files in {batch_dir} ...")
-    annotated = pd.concat(tsv_to_df(fp, filename_parser) for fp in batch_dir.glob('**/*.tsv'))
+    annotated = pd.concat((tsv_to_df(fp, filename_parser) for fp in batch_dir.glob('**/*.tsv')), ignore_index=True)
     print(f"DataFrame created: {annotated.shape=}")
 
     annotated.to_pickle(outpath)
@@ -252,10 +250,10 @@ def main(batch_dir, outfile, legacy_parser=None, path_to_raw=None):
 if __name__ == '__main__':
 
     argparser = argparse.ArgumentParser()
-    argparser.add_argument('--batch_dir', default=ROOT/PATHS['data']['2020']['from_inception_tsv']/'Inception_Output_CovidBatch')
-    argparser.add_argument('--outfile', default='annotated_df_CovidBatch_pilot.pkl')
-    argparser.add_argument('--legacy_parser', default='legacy_stella')
-    argparser.add_argument('--path_to_raw')
+    argparser.add_argument('--batch_dir', default='../../../Non_covid_data_15oct/from_inception_tsv/Inception_Output_Batch1')
+    argparser.add_argument('--outfile', default='annotated_df_Batch1_pilot.pkl')
+    argparser.add_argument('--legacy_parser', default='legacy_marten')
+    argparser.add_argument('--path_to_raw', default='../../../Non_covid_data_15oct/raw/notities_2017_deel2_cleaned.csv')
     args = argparser.parse_args()
 
     main(args.batch_dir, args.outfile, args.legacy_parser, args.path_to_raw)
