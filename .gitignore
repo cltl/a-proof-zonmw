@@ -4,3 +4,4 @@ __pycache__/
 
 create_env.sh
 tables/
+dummy_data/
