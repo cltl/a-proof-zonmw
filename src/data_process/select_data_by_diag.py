@@ -53,7 +53,7 @@ def select_notes(df, diag_df, query):
     subset = ['NotitieID', 'Notitietekst1', 'Notitietekst2', 'Notitietekst3']
     return df.loc[crit].drop_duplicates(subset=subset, keep='first')
 
-def save_results(hospital, df, diag_code):
+def save_results(hospital, df, diag_code, outpath):
     outfile = outpath / f"{hospital}_{diag_code}_2020_q1_q2_q3.csv"
     df.to_csv(outfile, index_label='idx_source_file')
     print(f"Number patients with {diag_code} diagnosis in {hospital}: {df.MDN.nunique()}")
@@ -62,7 +62,7 @@ def save_results(hospital, df, diag_code):
     return None
 
 amc_notes_diag = select_notes(amc, diag_amc, query)
-save_results('amc', amc_notes_diag, diag_code)
+save_results('amc', amc_notes_diag, diag_code, outpath)
 
 vumc_notes_diag = select_notes(vumc, diag_vumc, query)
-save_results('vumc', vumc_notes_diag, diag_code)
+save_results('vumc', vumc_notes_diag, diag_code, outpath)
