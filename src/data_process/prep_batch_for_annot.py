@@ -29,7 +29,7 @@ def get_regex(keyword, template):
     regex: str
     """
     if template == 0:
-        return rf"\b{keyword}.+\b"
+        return rf"\b{keyword}.*?\b"
     elif template == 1:
         return rf"\b{keyword}\b"
     elif template == 2:
