@@ -1,0 +1,33 @@
+{
+    "2017_raw": {
+        "amc": {
+            "glob": "valrisico_amc*.csv",
+            "sep": ",",
+            "quotechar": "\"",
+            "skiprows": 0,
+            "low_memory": false
+        },
+        "vumc": {
+            "glob": "notities_2017_deel*.csv"
+        }
+    },
+    "2018_raw": {
+        "amc": {
+            "glob": "valrisico_amc*.csv",
+            "sep": ",",
+            "quotechar": "\"",
+            "skiprows": 0,
+            "low_memory": false
+        }
+    },
+    "2020_raw": {
+        "amc": {
+            "glob": "Notities AMC*.csv",
+            "usecols": [0,1,3,4,5,6,7]
+        },
+        "vumc": {
+            "glob": "Notities VUMC*.csv",
+            "usecols": [0,1,3,4,5,6,7]
+        }
+    }
+}
