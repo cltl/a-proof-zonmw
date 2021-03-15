@@ -68,6 +68,7 @@ def raw_to_df(datapath):
         combined = combined.astype({'MDN': str, 'NotitieID': str})
         df = df.append(combined, ignore_index=True)
 
+    print(f"The data directory {datapath.stem} is processed:")
     print(df.institution.value_counts())
     return df
 
