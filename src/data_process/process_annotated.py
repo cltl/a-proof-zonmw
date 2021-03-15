@@ -37,7 +37,7 @@ def filename_parser(tsv):
     Filename convention:
     'institution--year--MDN--NotitieID--batch.conll'
     Example:
-    'VUMC--2020--1234567--123456789--batch3.conll'
+    'vumc--2020--1234567--123456789--batch3.conll'
 
     Parameters
     ----------
@@ -54,8 +54,8 @@ def filename_parser(tsv):
     institution, year, MDN, NotitieID, batch = conll.stem.split('--')
 
     return dict(
-        annotator = annotator,
-        institution = institution,
+        annotator = annotator.lower(),
+        institution = institution.lower(),
         year = year,
         MDN = MDN,
         NotitieID = NotitieID,
@@ -89,8 +89,8 @@ def filename_parser_legacy_stella(tsv):
     institution, _, MDN, NotitieID, _, _, _, _ = conll.stem.split('--')
 
     return dict(
-        annotator = annotator,
-        institution = institution,
+        annotator = annotator.lower(),
+        institution = institution.lower(),
         year = '2020',
         MDN = MDN,
         NotitieID = NotitieID,
@@ -130,10 +130,10 @@ def filename_parser_legacy_marten(tsv, raw_df):
     NotitieID = raw_df.loc[idx, 'notitieID']
     
     return dict(
-        annotator = annotator,
-        institution = 'VUMC',
+        annotator = annotator.lower(),
+        institution = 'vumc',
         year = '2017',
-        MDN = None,
+        MDN = '',
         NotitieID = NotitieID,
         batch = 'pilot',
         legacy_rawfile = rawfile,
@@ -250,11 +250,11 @@ def main(batch_dir, outfile, annotfile, legacy_parser=None, path_to_raw=None):
 if __name__ == '__main__':
 
     argparser = argparse.ArgumentParser()
-    argparser.add_argument('--batch_dir', default='../../../Covid_data_11nov/from_inception_tsv/Inception_Output_CovidBatch')
-    argparser.add_argument('--outfile', default='annotated_df_CovidBatch_pilot.pkl')
+    argparser.add_argument('--batch_dir', default='../../../Non_covid_data_15oct/from_inception_tsv/Inception_Output_Batch1')
+    argparser.add_argument('--outfile', default='annotated_df_Batch1_pilot.pkl')
     argparser.add_argument('--annotfile', default='../../data/annotated_notes_ids.csv')
-    argparser.add_argument('--legacy_parser', default='legacy_stella')
-    argparser.add_argument('--path_to_raw', default=None)
+    argparser.add_argument('--legacy_parser', default='legacy_marten')
+    argparser.add_argument('--path_to_raw', default='../../../Non_covid_data_15oct/raw/notities_2017_deel2_cleaned.csv')
     args = argparser.parse_args()
 
     main(args.batch_dir, args.outfile, args.annotfile, args.legacy_parser, args.path_to_raw)
