@@ -4,18 +4,18 @@ Save the resulting DataFrame in pkl format.
 Update the register of annotated notes ID's so that the notes are excluded from future selections.
 
 USAGE EXAMPLE:
-    python process annotated.py 
+    python process_annotated.py 
         --batch_dir mydirectory/ 
         --outfile mydf.pkl
 
 USAGE EXAMPLE LEGACY STELLA (see naming convention below):
-    python process annotated.py 
+    python process_annotated.py 
         --batch_dir mydirectory/ 
         --outfile mydf.pkl 
         --legacy_parser legacy_stella 
 
 USAGE EXAMPLE LEGACY MARTEN (see naming convention below):
-    python process annotated.py 
+    python process_annotated.py 
         --batch_dir mydirectory/ 
         --outfile mydf.pkl 
         --legacy_parser legacy_marten 
