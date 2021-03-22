@@ -1,8 +1,11 @@
 """
-TBD
-
-NOTE: This script requires spaCy's Dutch language pipeline. If you don't have it downloaded, run the command: `python -m spacy download nl_core_news_sm`
+Functions for processing a row from a dataframe into a CoNLL file.
 """
+
+
+import spacy
+import pandas as pd
+from pathlib import Path
 
 
 def text_to_conll(text, nlp):
@@ -46,15 +49,11 @@ def row_to_conllfile(row, nlp, outdir, batch):
     Parameters
     ----------
     row: pd Series
-        required fields: MDN, NotitieID, NotitieCSN, all_text
+        required fields: institution, Notitiedatum, MDN, NotitieID, all_text
     nlp: spacy Language class
         language-specific class that turns text into Doc objects
     outdir: Path
         path to store the output conll file
-    hospital: str
-        the hospital from which the data originates, to be used in the filename
-    year: str
-        the year of the data, to be used in the filename
     batch: str
         the batch name, to be used in the filename
 
