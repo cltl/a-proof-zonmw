@@ -200,7 +200,7 @@ def update_annotated_notes_ids(df, fp):
     print(f"Updated file saved to: {fp}")
 
 
-def main(batch_dir, outfile, annotfile, legacy_parser=None, path_to_raw=None):
+def main(batch_dir, outfile, update_annotated, annotfile, legacy_parser=None, path_to_raw=None):
     """
     Process a batch of annotated tsv files (INCEpTION output).
     Save the resulting DataFrame in pkl format.
@@ -233,7 +233,6 @@ def main(batch_dir, outfile, annotfile, legacy_parser=None, path_to_raw=None):
     # paths
     batch_dir = Path(batch_dir)
     outpath = batch_dir.parent / outfile
-    annotfile = Path(annotfile)
 
     # process tsv files in all subdirectories of batch_dir
     print(f"Processing tsv files in {batch_dir} ...")
@@ -244,19 +243,30 @@ def main(batch_dir, outfile, annotfile, legacy_parser=None, path_to_raw=None):
     print(f"DataFrame saved to {outpath}")
 
     # save the id's of the annotated notes
-    update_annotated_notes_ids(annotated, annotfile)
+    if update_annotated:
+        annotfile = Path(annotfile)
+        update_annotated_notes_ids(annotated, annotfile)
 
 
 if __name__ == '__main__':
 
     argparser = argparse.ArgumentParser()
-    argparser.add_argument('--batch_dir', default='../../../Non_covid_data_15oct/from_inception_tsv/Inception_Output_Batch1')
-    argparser.add_argument('--outfile', default='annotated_df_Batch1_pilot.pkl')
+    argparser.add_argument('--batch_dir', default='../../data/from_inception_tsv/sample1')
+    argparser.add_argument('--outfile', default='annotated_df_sample1.pkl')
+    argparser.add_argument('--no_update', dest='update_annotated', action='store_false')
     argparser.add_argument('--annotfile', default='../../data/annotated_notes_ids.csv')
-    argparser.add_argument('--legacy_parser', default='legacy_marten')
-    argparser.add_argument('--path_to_raw', default='../../../Non_covid_data_15oct/raw/notities_2017_deel2_cleaned.csv')
+    argparser.add_argument('--legacy_parser', default=None)
+    argparser.add_argument('--path_to_raw', default=None)
+    argparser.set_defaults(update_annotated=True)
     args = argparser.parse_args()
 
-    main(args.batch_dir, args.outfile, args.annotfile, args.legacy_parser, args.path_to_raw)
+    main(
+        args.batch_dir, 
+        args.outfile, 
+        args.update_annotated, 
+        args.annotfile, 
+        args.legacy_parser, 
+        args.path_to_raw,
+    )
 
 
