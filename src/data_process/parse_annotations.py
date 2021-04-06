@@ -105,14 +105,15 @@ if __name__ == '__main__':
     argparser.add_argument('--tagset', default='../../tagsets/tagset.json')
     argparser.add_argument('--infile', default='../../data/from_inception_tsv/annotated_df_sample1.pkl')
     argparser.add_argument('--outfile', default='../../data/from_inception_tsv/annotated_df_sample1_parsed.pkl')
-    argparser.add_argument('--deduplicate', default=False)
+    argparser.add_argument('--deduplicate', dest='deduplicate', action='store_true')
+    argparser.set_defaults(deduplicate=False)
     args = argparser.parse_args()
 
     with open(args.tagset, 'r') as f:
         tagset = json.load(f)['tags']
     
     df = pd.read_pickle(args.infile
-    ).pipe(preprocessing, deduplicate=bool(args.deduplicate)
+    ).pipe(preprocessing, deduplicate=args.deduplicate
     ).pipe(parse_df, tagset)
 
     df.to_pickle(args.outfile)
