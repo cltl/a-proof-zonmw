@@ -56,7 +56,7 @@ def create_parse_index(cat_dict):
 
 
 def parse_label(label, parse_index):
-    s = pd.Series(index=parse_index)
+    s = pd.Series(index=parse_index, dtype=object)
     for idx in s.index:
         if '_lvl' in idx:
             regex = re.compile(f"{idx[:3].lower()}(\d)")
@@ -95,7 +95,7 @@ def preprocessing(df, deduplicate=False):
         df = deduplicate_notes(df)
     return df.assign(
         sen_id = lambda df: df.NotitieID.astype(str) + '_' + df.sen_tok.str.split('-').str[0],
-        tok = lambda df: df.sen_tok.str.split('-').str[1],
+        tok = lambda df: df.sen_tok.str.split('-').str[1].astype(int),
     )
 
 
