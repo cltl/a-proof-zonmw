@@ -188,11 +188,11 @@ def update_annotated_notes_ids(df, fp):
     """
     cols = ['institution', 'year', 'MDN', 'NotitieID', 'batch', 'legacy_rawfile']
     annotated_notes_ids = df[cols].drop_duplicates()
-    print(f"Number of annotated notes in this batch: {annotated_notes_ids.shape[0]}")
+    print(f"Number of unique annotated notes in this batch: {annotated_notes_ids.shape[0]}")
 
     if fp.exists():
         existing_notes_ids = pd.read_csv(fp)
-        print(f"Number of notes from previous annotations: {existing_notes_ids.shape[0]}")
+        print(f"Number of unique notes from previous annotations: {existing_notes_ids.shape[0]}")
         annotated_notes_ids = existing_notes_ids.append(annotated_notes_ids)
     
     annotated_notes_ids.to_csv(fp, index=False)
