@@ -22,14 +22,11 @@
     "tag_name" : ".B530: MBW",
     "tag_description" : "Functions of maintaining appropriate body weight, including weight gain during the developmental period."
 }, {
-    "tag_name" : ".D550: ETN",
-    "tag_description" : "Carrying out the coordinated tasks and actions of eating food that has been served, bringing it to the mouth and consuming it in culturally acceptable ways, cutting or breaking food into pieces, opening bottles and cans, using eating implements, having meals, feasting or dining."
-}, {
     "tag_name" : ".B1300: ENR",
     "tag_description" : "Mental functions that produce vigour and stamina."
 }, {
-    "tag_name" : ".D450: FAC",
-    "tag_description" : "Moving along a surface on foot, step by step, so that one foot is always on the ground, such as when strolling, sauntering, walking forwards, backwards, or sideways. Inclusions: walking short or long distances; walking on different surfaces; walking around obstacles."
+    "tag_name" : ".D450-D469: FAC",
+    "tag_description" : "Walking and moving: walking; moving around; moving around in different locations; moving around using equipment."
 }, {
     "tag_name" : ".D840-D859: BER",
     "tag_description" : "Work and employment: apprenticeship (work preparation); acquiring, keeping and terminating a job; remunerative employment; non-remunerative employment."
@@ -68,16 +65,16 @@
     "tag_description" : "Beademing"
 }, {
     "tag_name" : "adm1",
-    "tag_description" : "Zuurstof nodig in rust of tijdens inspanning; EN/OF AHF > 35"
+    "tag_description" : "Zuurstof nodig in rust of tijdens inspanning"
 }, {
     "tag_name" : "adm2",
-    "tag_description" : "Kortademigheid in rust; EN/OF AHF 31-35"
+    "tag_description" : "Kortademigheid in rust"
 }, {
     "tag_name" : "adm3",
-    "tag_description" : "Kortademigheid bij inspanning; EN/OF AHF 21-30"
+    "tag_description" : "Kortademigheid bij inspanning"
 }, {
     "tag_name" : "adm4",
-    "tag_description" : "Geen stoornis bij ademhaling; EN/OF AHF 9-20"
+    "tag_description" : "Geen stoornis bij ademhaling"
 }, {
     "tag_name" : "ins0",
     "tag_description" : "0 ≤ MET < 1. Alleen liggende activiteiten zijn fysiek vol te houden."
@@ -98,34 +95,19 @@
     "tag_description" : "MET > 6. Joggen, zware oefeningen, hardlopen, snel traplopen, sporten zijn fysiek vol te houden."
 },  {
     "tag_name" : "mbw0",
-    "tag_description" : "valt fors af (meer dan 6 kg in de laatste 6 maanden) of komt fors aan (meer dan 6 kg in de laatste 6 maanden); EN is opgenomen op de IC"
+    "tag_description" : "Ondanks voedingssupplementen / sonde / TPV niet in staat gewicht te handhaven (altijd in combinatie met ziekteactiviteit – inflammatie, katabolie, IC-opname)"
 }, {
     "tag_name" : "mbw1",
-    "tag_description" : "valt fors af (meer dan 6 kg in de laatste 6 maanden) of komt fors aan (meer dan 6 kg in de laatste 6 maanden); SNAQ ≥ 3 punten"
+    "tag_description" : "valt fors af of komt fors aan; EN/OF inname is verminderd (<50% van behoefte); EN/OF ondersteuning is nodig om op gewicht te blijven of te komen"
 }, {
     "tag_name" : "mbw2",
-    "tag_description" : "valt tamelijk veel af (meer dan 3 kg in de afgelopen maand) of komt tamelijk veel aan (meer dan 3 kg in de afgelopen maand); SNAQ = 2 punten"
+    "tag_description" : "valt tamelijk veel af of komt tamelijk veel aan; EN/OF inname is verminderd, maar ondersteuning (stimulans / voedingssupplementen / sondevoeding / TPV) is nog niet nodig"
 }, {
     "tag_name" : "mbw3",
-    "tag_description" : "valt enigszins onbedoeld af of komt enigszins onbedoeld aan; OF is veel afgevallen maar is daarna ook weer wat aangekomen"
+    "tag_description" : "valt enigszins onbedoeld af of komt enigszins onbedoeld aan; OF is veel afgevallen maar is daarna ook weer wat aangekomen; EN/OF voldoende inname (>75% van behoefte)"
 }, {
     "tag_name" : "mbw4",
-    "tag_description" : "gezond gewicht, valt niet onbedoeld af, komt niet onbedoeld aan; SNAQ = 0 / 1 punt"
-}, {
-    "tag_name" : "etn0",
-    "tag_description" : "eten is niet mogelijk; EN/OF volledig afhankelijk van sondevoeding / TPV"
-}, {
-    "tag_name" : "etn1",
-    "tag_description" : "inname is ernstig verminderd (<50% van behoefte); EN/OF sondevoeding / TPV is nodig"
-}, {
-    "tag_name" : "etn2",
-    "tag_description" : "inname is verminderd; EN/OF stimulans / voedingsmodules / drinkvoeding is nodig (maar niet sondevoeding / TPV)"
-}, {
-    "tag_name" : "etn3",
-    "tag_description" : "kan zelfstandig eten maar met aanpassingen; EN/OF enigszins verminderde inname (>75% van behoefte); EN/OF met behulp van adviezen kan een goede inname gewaarborgd worden"
-}, {
-    "tag_name" : "etn4",
-    "tag_description" : "kan zelfstandig eten (volgens cultureel acceptabel normen), goede inname, eet goed (conform behoefte)"
+    "tag_description" : "gezond gewicht, valt niet onbedoeld af, komt niet onbedoeld aan, goede inname"
 }, {
     "tag_name" : "enr0",
     "tag_description" : "Zeer ernstige vermoeidheid; tot niets in staat en ligt grotendeels in bed"
@@ -176,7 +158,7 @@
     "tag_description" : "Kan volledig werken/studeren (functioneert op gezond niveau)"
 }, {
     "tag_name" : "mbw_plus",
-    "tag_description" : "MBW: sprake van onbedoeld aankomen"
+    "tag_description" : "MBW: sprake van aankomen"
 }, {
     "tag_name" : "other_disregard_file",
     "tag_description" : "Gebruik tag om file van dataset uit te sluiten; label het eerste woord van file, zet file op slot, ga naar volgende file."
