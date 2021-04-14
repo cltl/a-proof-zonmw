@@ -14,7 +14,7 @@ def select_notes(
     n_files       = 60,
     pct_covid     = 0.5,
     pct_kwd       = 0.8,
-    domains       = ['ENR', 'ATT', 'STM', 'ADM', 'INS', 'MBW', 'FAC', 'BER'],
+    domains       = ['ENR', 'ATT', 'STM', 'ADM', 'INS', 'MBW', 'FAC', 'BER', 'ETN'],
     min_matched_domains = 3,
     n_iaa         = 5,
     iaa_sources   = ['cov_2020'],
