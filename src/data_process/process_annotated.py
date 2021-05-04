@@ -193,7 +193,8 @@ def update_annotated_notes_ids(df, fp):
     if fp.exists():
         existing_notes_ids = pd.read_csv(fp)
         print(f"Number of unique notes from previous annotations: {existing_notes_ids.shape[0]}")
-        annotated_notes_ids = existing_notes_ids.append(annotated_notes_ids)
+        annotated_notes_ids = existing_notes_ids.append(annotated_notes_ids
+        ).drop_duplicates(subset='NotitieID')
     
     annotated_notes_ids.to_csv(fp, index=False)
     print(f"Total number annotated notes: {annotated_notes_ids.shape[0]}")
