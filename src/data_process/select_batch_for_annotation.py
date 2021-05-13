@@ -75,7 +75,7 @@ def select_notes(
     # select `n_iaa` files for iaa
     selected = pd.DataFrame()
     for source in iaa_sources:
-        crit_kwd = df[matched_domains].applymap(bool).any(axis=1)
+        crit_kwd = data[source][matched_domains].applymap(bool).any(axis=1)
         crit_n_kwd = data[source].n_matched_domains >= min_matched_domains
         selected = selected.append(data[source].loc[crit_kwd & crit_n_kwd].sample(n_iaa).assign(source=source))
 
@@ -88,7 +88,7 @@ def select_notes(
         for source, n in n_files_per_source.items():
             # keyword sample
             n_kwd = int(n * pct_kwd)
-            crit_kwd = df[matched_domains].applymap(bool).any(axis=1)
+            crit_kwd = data[source][matched_domains].applymap(bool).any(axis=1)
             crit_n_kwd = data[source].n_matched_domains >= min_matched_domains
             kwd_source = data[source].loc[crit_kwd & crit_n_kwd]
             selected = kwd_source.query(query).sample(n_kwd)
