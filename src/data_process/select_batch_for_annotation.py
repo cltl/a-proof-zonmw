@@ -12,11 +12,12 @@ def select_notes(
     sources_other = ['2017', '2018', 'non_cov_2020'],
     source_covid  = 'cov_2020',
     n_files       = 60,
-    pct_covid     = 0.5,
-    pct_kwd       = 0.8,
+    pct_covid     = 0.3,
+    pct_kwd       = 0.7,
     domains       = ['ENR', 'ATT', 'STM', 'ADM', 'INS', 'MBW', 'FAC', 'BER', 'ETN'],
-    min_matched_domains = 3,
-    n_iaa         = 5,
+    matched_domains = ['ATT', 'MBW', 'BER'],
+    min_matched_domains = 2,
+    n_iaa         = 3,
     iaa_sources   = ['cov_2020'],
 ):
     """
@@ -40,6 +41,8 @@ def select_notes(
         desired fraction of notes containing keywords in the batch
     domains: list
         list of column names in `data` df's that contain the keyword matches
+    matched_domains: list
+        only notes that contain keyword matches from these ICF domains are selected
     min_matched_domains: int
         only notes that contain keyword matches from at least this number of ICF domains are selected
     n_iaa: int
@@ -50,7 +53,7 @@ def select_notes(
     Returns
     -------
     output: DataFrame
-        dataframe with the selected batch 
+        dataframe with the selected batch
     """
     output = pd.DataFrame(columns=['NotitieID'])
 
@@ -65,15 +68,16 @@ def select_notes(
             return int(n_files * pct_covid - subtract_iaa)
         else:
             return int(n_files * (1 - pct_covid) / len(sources_other) - subtract_iaa)
-    
+
     sources = sources_other + [source_covid]
     n_files_per_source = {source:get_n_files(source) for source in sources}
 
     # select `n_iaa` files for iaa
     selected = pd.DataFrame()
     for source in iaa_sources:
-        crit_kwd = data[source].n_matched_domains >= min_matched_domains
-        selected = selected.append(data[source].loc[crit_kwd].sample(n_iaa).assign(source=source))
+        crit_kwd = df[matched_domains].applymap(bool).any(axis=1)
+        crit_n_kwd = data[source].n_matched_domains >= min_matched_domains
+        selected = selected.append(data[source].loc[crit_kwd & crit_n_kwd].sample(n_iaa).assign(source=source))
 
     for annotator in annotators:
         output = output.append(selected.assign(annotator=annotator, samp_meth='kwd_iaa'))
@@ -84,8 +88,9 @@ def select_notes(
         for source, n in n_files_per_source.items():
             # keyword sample
             n_kwd = int(n * pct_kwd)
-            crit_kwd = data[source].n_matched_domains >= min_matched_domains
-            kwd_source = data[source].loc[crit_kwd]
+            crit_kwd = df[matched_domains].applymap(bool).any(axis=1)
+            crit_n_kwd = data[source].n_matched_domains >= min_matched_domains
+            kwd_source = data[source].loc[crit_kwd & crit_n_kwd]
             selected = kwd_source.query(query).sample(n_kwd)
             selected['samp_meth'] = 'kwd'
             selected['source'] = source
