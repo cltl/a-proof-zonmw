@@ -1,0 +1,258 @@
+[ {
+  "name" : "webanno.custom.Relation",
+  "features" : [ ],
+  "uiName" : "Relation",
+  "type" : "relation",
+  "description" : null,
+  "enabled" : true,
+  "built_in" : false,
+  "readonly" : false,
+  "attach_type" : {
+    "name" : "webanno.custom.Token"
+  },
+  "attach_feature" : null,
+  "allow_stacking" : true,
+  "cross_sentence" : true,
+  "show_hover" : true,
+  "anchoring_mode" : "TOKENS",
+  "overlap_mode" : "ANY_OVERLAP",
+  "validation_mode" : "ALWAYS",
+  "lock_to_token_offset" : false,
+  "multiple_tokens" : true,
+  "project_name" : "jenia_test",
+  "linked_list_behavior" : false,
+  "on_click_javascript_action" : null,
+  "traits" : null
+}, {
+  "name" : "webanno.custom.Token",
+  "features" : [ {
+    "name" : "ICF",
+    "tag_set" : {
+        "name" : "WHO ICF",
+        "typeUiName" : null,
+        "description" : "ICF domeinen, gradaties, overige tags",
+        "language" : null,
+        "type" : null,
+        "type_name" : null,
+        "type_description" : null,
+        "tags" : [ {
+            "tag_name" : ".B140: ATT",
+            "tag_description" : "Specific mental functions of focusing on an external stimulus or internal experience for the required period of time."
+        }, {
+            "tag_name" : ".B152: STM",
+            "tag_description" : "Specific mental functions related to the feeling and affective components of the processes of the mind."
+        }, {
+            "tag_name" : ".B440: ADM",
+            "tag_description" : "Functions of inhaling air into the lungs, the exchange of gases between air and blood, and exhaling air."
+        }, {
+            "tag_name" : ".B455: INS",
+            "tag_description" : "Functions related to respiratory and cardiovascular capacity as required for enduring physical exertion."
+        }, {
+            "tag_name" : ".B530: MBW",
+            "tag_description" : "Functions of maintaining appropriate body weight, including weight gain during the developmental period."
+        }, {
+            "tag_name" : ".D550: ETN",
+            "tag_description" : "Carrying out the coordinated tasks and actions of eating food that has been served, bringing it to the mouth and consuming it in culturally acceptable ways, cutting or breaking food into pieces, opening bottles and cans, using eating implements, having meals, feasting or dining."
+        }, {
+            "tag_name" : ".B1300: ENR",
+            "tag_description" : "Mental functions that produce vigour and stamina."
+        }, {
+            "tag_name" : ".D450: FAC",
+            "tag_description" : "Moving along a surface on foot, step by step, so that one foot is always on the ground, such as when strolling, sauntering, walking forwards, backwards, or sideways. Inclusions: walking short or long distances; walking on different surfaces; walking around obstacles."
+        }, {
+            "tag_name" : ".D840-D859: BER",
+            "tag_description" : "Work and employment: apprenticeship (work preparation); acquiring, keeping and terminating a job; remunerative employment; non-remunerative employment."
+        }, {
+            "tag_name" : "att0",
+            "tag_description" : "Niet  in staat zich te concentreren / aandacht te richten"
+        }, {
+            "tag_name" : "att1",
+            "tag_description" : "Kan zich nauwelijks concentreren / de aandacht richten / vasthouden"
+        }, {
+            "tag_name" : "att2",
+            "tag_description" : "Kan de aandacht slechts korte tijd richten / vasthouden / verdelen en concentreren"
+        }, {
+            "tag_name" : "att3",
+            "tag_description" : "Lichte stoornis bij concentreren / aandacht te richten / vasthouden / verdelen gedurende langere tijd of bij complexe taak"
+        }, {
+            "tag_name" : "att4",
+            "tag_description" : "Geen stoornis bij concentreren / richten / vasthouden / verdelen van aandacht"
+        }, {
+            "tag_name" : "stm0",
+            "tag_description" : "Emotionele vervlakking, apathisch, labiel, ongepaste emoties"
+        }, {
+            "tag_name" : "stm1",
+            "tag_description" : "Ernstige stoornis bij emotioneel functioneren: hevige negatieve emoties zoals angst, boosheid, verdriet, etc."
+        }, {
+            "tag_name" : "stm2",
+            "tag_description" : "Matige stoornis bij emotioneel functioneren: negatieve emoties zoals angst, boosheid, verdriet, etc."
+        }, {
+            "tag_name" : "stm3",
+            "tag_description" : "Lichte stoornis bij emotioneel functioneren: prikkelbaar, somber, etc."
+        }, {
+            "tag_name" : "stm4",
+            "tag_description" : "Geen stoornis bij emotioneel functioneren: gepaste emoties, goed gereguleerd, etc."
+        }, {
+            "tag_name" : "adm0",
+            "tag_description" : "Beademing"
+        }, {
+            "tag_name" : "adm1",
+            "tag_description" : "Zuurstof nodig in rust of tijdens inspanning; EN/OF AHF > 35"
+        }, {
+            "tag_name" : "adm2",
+            "tag_description" : "Kortademigheid in rust; EN/OF AHF 31-35"
+        }, {
+            "tag_name" : "adm3",
+            "tag_description" : "Kortademigheid bij inspanning; EN/OF AHF 21-30"
+        }, {
+            "tag_name" : "adm4",
+            "tag_description" : "Geen stoornis bij ademhaling; EN/OF AHF 9-20"
+        }, {
+            "tag_name" : "ins0",
+            "tag_description" : "0 ≤ MET < 1. Alleen liggende activiteiten zijn fysiek vol te houden."
+        }, {
+            "tag_name" : "ins1",
+            "tag_description" : "1 ≤ MET < 2. Zittende activiteiten zijn fysiek vol te houden."
+        }, {
+            "tag_name" : "ins2",
+            "tag_description" : "2 ≤ MET < 3. Lopen op langzaam tot gemiddeld tempo, boodschappen doen, lichte huishoudelijke werkzaamheden zijn fysiek vol te houden."
+        }, {
+            "tag_name" : "ins3",
+            "tag_description" : "3 ≤ MET < 4. Lopen/fietsen op normaal tempo, tuinieren, oefeningen zonder apparaten zijn fysiek vol te houden."
+        }, {
+            "tag_name" : "ins4",
+            "tag_description" : "4 ≤ MET ≤ 6. Fietsen/lopen op flink tempo, flinke inspanning (e.g. fietsen vanaf 16 km/u), zwaar huishoudelijk werk zijn fysiek vol te houden."
+        }, {
+            "tag_name" : "ins5",
+            "tag_description" : "MET > 6. Joggen, zware oefeningen, hardlopen, snel traplopen, sporten zijn fysiek vol te houden."
+        },  {
+            "tag_name" : "mbw0",
+            "tag_description" : "valt fors af (meer dan 6 kg in de laatste 6 maanden) of komt fors aan (meer dan 6 kg in de laatste 6 maanden); EN is opgenomen op de IC"
+        }, {
+            "tag_name" : "mbw1",
+            "tag_description" : "valt fors af (meer dan 6 kg in de laatste 6 maanden) of komt fors aan (meer dan 6 kg in de laatste 6 maanden); SNAQ ≥ 3 punten"
+        }, {
+            "tag_name" : "mbw2",
+            "tag_description" : "valt tamelijk veel af (meer dan 3 kg in de afgelopen maand) of komt tamelijk veel aan (meer dan 3 kg in de afgelopen maand); SNAQ = 2 punten"
+        }, {
+            "tag_name" : "mbw3",
+            "tag_description" : "valt enigszins onbedoeld af of komt enigszins onbedoeld aan; OF is veel afgevallen maar is daarna ook weer wat aangekomen"
+        }, {
+            "tag_name" : "mbw4",
+            "tag_description" : "gezond gewicht, valt niet onbedoeld af, komt niet onbedoeld aan; SNAQ = 0 / 1 punt"
+        }, {
+            "tag_name" : "etn0",
+            "tag_description" : "eten is niet mogelijk; EN/OF volledig afhankelijk van sondevoeding / TPV"
+        }, {
+            "tag_name" : "etn1",
+            "tag_description" : "inname is ernstig verminderd (<50% van behoefte); EN/OF sondevoeding / TPV is nodig"
+        }, {
+            "tag_name" : "etn2",
+            "tag_description" : "inname is verminderd; EN/OF stimulans / voedingsmodules / drinkvoeding is nodig (maar niet sondevoeding / TPV)"
+        }, {
+            "tag_name" : "etn3",
+            "tag_description" : "kan zelfstandig eten maar met aanpassingen; EN/OF enigszins verminderde inname (>75% van behoefte); EN/OF met behulp van adviezen kan een goede inname gewaarborgd worden"
+        }, {
+            "tag_name" : "etn4",
+            "tag_description" : "kan zelfstandig eten (volgens cultureel acceptabel normen), goede inname, eet goed (conform behoefte)"
+        }, {
+            "tag_name" : "enr0",
+            "tag_description" : "Zeer ernstige vermoeidheid; tot niets in staat en ligt grotendeels in bed"
+        }, {
+            "tag_name" : "enr1",
+            "tag_description" : "Ernstige vermoeidheid; tot zeer weinig in staat"
+        }, {
+            "tag_name" : "enr2",
+            "tag_description" : "Matige vermoeidheid; pt is snel vermoeid bij lichte activiteiten of moet lang herstellen na een activiteit"
+        }, {
+            "tag_name" : "enr3",
+            "tag_description" : "Lichte vermoeidheid waardoor enigszins beperkt"
+        }, {
+            "tag_name" : "enr4",
+            "tag_description" : "Geen stoornis bij energiniveau"
+        }, {
+            "tag_name" : "fac0",
+            "tag_description" : "De patiënt kan niet lopen of heeft hierbij hulp nodig van twee of meer personen. Of: de patiënt loopt in een loopbrug."
+        }, {
+            "tag_name" : "fac1",
+            "tag_description" : "De patiënt heeft continu stevige ondersteuning nodig van een persoon om het gewicht te dragen en de balans te houden."
+        }, {
+            "tag_name" : "fac2",
+            "tag_description" : "De patiënt heeft voortdurend of met tussenpozen hulp nodig bij het bewaren van de balans of de coördinatie."
+        }, {
+            "tag_name" : "fac3",
+            "tag_description" : "De patiënt heeft voor de veiligheid supervisie nodig van een persoon en behoeft hooguit verbale begeleiding tijdens het lopen. De patiënt heeft echter geen fysiek contact nodig om te kunnen lopen."
+        }, {
+            "tag_name" : "fac4",
+            "tag_description" : "De patiënt kan zelfstandig lopen op een vlakke ondergrond, maar kan niet veilig traplopen, hellingen nemen of op oneffen onder gronden lopen; OF de patiënt kan zelfstandig lopen maar het lopen is niet volledig normaal."
+        }, {
+            "tag_name" : "fac5",
+            "tag_description" : "De patiënt kan zelfstandig lopen op een vlakke ondergrond, op oneffen ondergrond, op hellingen en kan traplopen."
+        },  {
+            "tag_name" : "ber0",
+            "tag_description" : "Kan niet werken/studeren"
+        }, {
+            "tag_name" : "ber1",
+            "tag_description" : "Kan zeer beperkt werken/studeren"
+        }, {
+            "tag_name" : "ber2",
+            "tag_description" : "Kan voor ongeveer 50% werken/studeren, of kan alleen thuis werken en niet naar school/kantoor gaan"
+        }, {
+            "tag_name" : "ber3",
+            "tag_description" : "Bijna volledig kunnen werken/studeren"
+        }, {
+            "tag_name" : "ber4",
+            "tag_description" : "Kan volledig werken/studeren (functioneert op gezond niveau)"
+        }, {
+            "tag_name" : "mbw_plus",
+            "tag_description" : "MBW: sprake van onbedoeld aankomen"
+        }, {
+            "tag_name" : "other_disregard_file",
+            "tag_description" : "Gebruik tag om file van dataset uit te sluiten; label het eerste woord van file, zet file op slot, ga naar volgende file."
+        }, {
+            "tag_name" : "other_target",
+            "tag_description" : "gemarkeerde tekst heeft betrekking op te realiseren doelstelling (skip annotatie domein/gradatie)"
+        }, {
+            "tag_name" : "other_background",
+            "tag_description" : "gemarkeerde tekst heeft betrekking op verleden; dient als context voor huidige situatie (skip annotatie domein/gradatie)"
+        } ],
+        "create_tag" : false
+        },
+    "uiName" : "ICF",
+    "type" : "uima.cas.String",
+    "enabled" : true,
+    "visible" : true,
+    "include_in_hover" : false,
+    "required" : false,
+    "remember" : false,
+    "hideUnconstraintFeature" : false,
+    "description" : null,
+    "project_name" : "jenia_test",
+    "multi_value_mode" : "NONE",
+    "link_mode" : "NONE",
+    "link_type_name" : null,
+    "link_type_role_feature_name" : null,
+    "link_type_target_feature_name" : null,
+    "traits" : "{\"multipleRows\":false,\"dynamicSize\":false,\"collapsedRows\":1,\"expandedRows\":1,\"keyBindings\":[]}"
+  } ],
+  "uiName" : "Token",
+  "type" : "span",
+  "description" : null,
+  "enabled" : true,
+  "built_in" : false,
+  "readonly" : false,
+  "attach_type" : null,
+  "attach_feature" : null,
+  "allow_stacking" : true,
+  "cross_sentence" : true,
+  "show_hover" : true,
+  "anchoring_mode" : "TOKENS",
+  "overlap_mode" : "ANY_OVERLAP",
+  "validation_mode" : "ALWAYS",
+  "lock_to_token_offset" : false,
+  "multiple_tokens" : true,
+  "project_name" : "jenia_test",
+  "linked_list_behavior" : false,
+  "on_click_javascript_action" : null,
+  "traits" : null
+} ]
