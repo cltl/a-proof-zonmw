@@ -102,7 +102,7 @@ def preprocessing(df, deduplicate=False):
 if __name__ == '__main__':
 
     argparser = argparse.ArgumentParser()
-    argparser.add_argument('--tagset', default='../../tagsets/tagset.json')
+    argparser.add_argument('--tagset', default='../../inception_config/tagset.json')
     argparser.add_argument('--infile', default='../../data/from_inception_tsv/annotated_df_sample1.pkl')
     argparser.add_argument('--outfile', default='../../data/from_inception_tsv/annotated_df_sample1_parsed.pkl')
     argparser.add_argument('--deduplicate', dest='deduplicate', action='store_true')
