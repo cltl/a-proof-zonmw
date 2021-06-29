@@ -2,6 +2,7 @@ name: zonmw
 channels:
   - defaults
   - conda-forge
+  - pytorch
 dependencies:
   - python=3.8.5
   - pandas=1.2.1
@@ -12,3 +13,12 @@ dependencies:
   - jupyterlab=2.2.6
   - ipykernel=5.3.4
   - matplotlib=3.3.4
+  - tqdm=4.59
+  - pytorch=1.8
+  - cudatoolkit=10.2
+  - requests=2.25
+  - tensorboardx
+  - wandb
+  - pip
+  - pip:
+      - simpletransformers
