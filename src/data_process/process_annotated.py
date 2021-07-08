@@ -4,21 +4,21 @@ Save the resulting DataFrame in pkl format.
 Update the register of annotated notes ID's so that the notes are excluded from future selections.
 
 USAGE EXAMPLE:
-    python process_annotated.py 
-        --batch_dir mydirectory/ 
+    python process_annotated.py
+        --batch_dir mydirectory/
         --outfile mydf.pkl
 
 USAGE EXAMPLE LEGACY STELLA (see naming convention below):
-    python process_annotated.py 
-        --batch_dir mydirectory/ 
-        --outfile mydf.pkl 
-        --legacy_parser legacy_stella 
+    python process_annotated.py
+        --batch_dir mydirectory/
+        --outfile mydf.pkl
+        --legacy_parser legacy_stella
 
 USAGE EXAMPLE LEGACY MARTEN (see naming convention below):
-    python process_annotated.py 
-        --batch_dir mydirectory/ 
-        --outfile mydf.pkl 
-        --legacy_parser legacy_marten 
+    python process_annotated.py
+        --batch_dir mydirectory/
+        --outfile mydf.pkl
+        --legacy_parser legacy_marten
         --path_to_raw ../mydir/raw/notities2017.csv
 """
 
@@ -43,7 +43,7 @@ def filename_parser(tsv):
     ----------
     tsv: Path
         path to tsv file (INCEpTION output)
-    
+
     Returns
     -------
     dict
@@ -78,7 +78,7 @@ def filename_parser_legacy_stella(tsv):
     ----------
     tsv: Path
         path to tsv file (INCEpTION output)
-    
+
     Returns
     -------
     dict
@@ -115,7 +115,7 @@ def filename_parser_legacy_marten(tsv, raw_df):
         path to tsv file (INCEpTION output)
     raw_df: DataFrame
         original raw data (df read from csv)
-    
+
     Returns
     -------
     dict
@@ -124,11 +124,11 @@ def filename_parser_legacy_marten(tsv, raw_df):
     annotator = tsv.stem
     conll = tsv.parent
     rawfile, idx1 = conll.stem.split('---')
-    
+
     # get NotitieID based on idx+1
     idx = int(idx1) - 1
     NotitieID = raw_df.loc[idx, 'notitieID']
-    
+
     return dict(
         annotator = annotator.lower(),
         institution = 'vumc',
@@ -150,14 +150,14 @@ def tsv_to_df(filepath, filename_parser=filename_parser):
         path to tsv file (INCEpTION output)
     filename_parser:
         filename_parser function to use for metadata extraction
-    
+
     Returns
     -------
     DataFrame
         dataframe of annotations from tsv and metadata from filename
     """
     metadata = filename_parser(filepath)
-    
+
     names = ['sen_tok', 'char', 'token', 'label', 'relation']
     return pd.read_csv(
         filepath,
@@ -181,7 +181,7 @@ def update_annotated_notes_ids(df, fp):
         dataframe of annotations (batch)
     fp: Path
         path to the file that logs annotated notes
-    
+
     Returns
     -------
     None
@@ -195,7 +195,7 @@ def update_annotated_notes_ids(df, fp):
         print(f"Number of unique notes from previous annotations: {existing_notes_ids.shape[0]}")
         annotated_notes_ids = existing_notes_ids.append(annotated_notes_ids
         ).drop_duplicates(subset='NotitieID')
-    
+
     annotated_notes_ids.to_csv(fp, index=False)
     print(f"Total number annotated notes: {annotated_notes_ids.shape[0]}")
     print(f"Updated file saved to: {fp}")
@@ -213,16 +213,20 @@ def main(batch_dir, outfile, update_annotated, annotfile, legacy_parser=None, pa
         path to a batch of annotation outputs
     outfile: str
         filename for the output pkl
+    update_annotated: bool
+        if True, add the notes ID's of current annotations to `annotfile`
+    annotfile: str
+        path to the register of already annotated notes ID's
     legacy_parser: str, default=None
         name of legacy parser, if needed
     path_to_raw: str, default=None
         only for legacy_marten; path to the raw data csv file
-    
+
     Returns
     -------
     None
     """
-    
+
     # select filename parser
     global filename_parser
     if legacy_parser == 'legacy_marten':
@@ -262,12 +266,10 @@ if __name__ == '__main__':
     args = argparser.parse_args()
 
     main(
-        args.batch_dir, 
-        args.outfile, 
-        args.update_annotated, 
-        args.annotfile, 
-        args.legacy_parser, 
+        args.batch_dir,
+        args.outfile,
+        args.update_annotated,
+        args.annotfile,
+        args.legacy_parser,
         args.path_to_raw,
     )
-
-
