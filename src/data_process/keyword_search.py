@@ -1,12 +1,5 @@
 """
 Functions for finding keyword matches in a dataframe with text and storing the results in a pkl file.
-When ran as script will find and store keyword matches for the `processed.pkl` files in:
-    - 2017_raw
-    - 2018_raw
-    - 2020_raw
-
-The version of keywords can be given as a parameter to the script, for example:
-    python keyword_search.py --kwd_v v1
 """
 
 
@@ -105,35 +98,3 @@ def save_kwd_results(df, domains, outfile):
     df.to_pickle(outfile)
     print(f"Results {len(df)=} are saved to {outfile}")
     return None
-
-
-if __name__ == '__main__':
-
-    argparser = argparse.ArgumentParser()
-    argparser.add_argument('--kwd_v', default='v1')
-    args = argparser.parse_args()
-
-    path = Path('../../data')
-    data_dirs = [
-        '2017_raw',
-        '2018_raw',
-        '2020_raw',
-    ]
-
-    kwd_path = f'../../keywords/keywords_{args.kwd_v}.xlsx'
-    kwd = pd.read_excel(kwd_path)
-    kwd['regex'] = kwd.apply(lambda row: get_regex(row.keyword, row.regex_template_id), axis=1)
-    reg_dict = get_reg_dict(kwd)
-
-    domains = ['ENR', 'ATT', 'STM', 'ADM', 'INS', 'MBW', 'FAC', 'BER']
-
-    for datadir in data_dirs:
-        infile = path / datadir / 'processed.pkl'
-        outfile = path / f"keyword_results/{(path / datadir).stem[:4]}_kwd_{args.kwd_v}.pkl"
-        
-        df = pd.read_pickle(infile)
-        print(f"Processing {datadir}: {len(df)=}")
-        df = find_keywords(df, reg_dict)
-        save_kwd_results(df, domains, outfile)
-        
-
