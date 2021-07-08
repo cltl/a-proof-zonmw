@@ -20,7 +20,18 @@ from sklearn.model_selection import ShuffleSplit
 
 def main(annot_dir, out_dir):
     """
-    TBD
+    Process annotations to extract 'background' and 'target' sentences. Create new sentence-level dataframes (train, dev, test) with 20% background/target sentences (label: 1) and 80% other sentences (label: 0). Save the outputs in pickle format.
+
+    Parameters
+    ----------
+    annot_dir: str
+        path to directory with pickled DataFrames of parsed annotations
+    annot_dir: str
+        path to directory to store the outputs: train.pkl, dev.pkl, test.pkl
+
+    Returns
+    -------
+    None
     """
     path = Path(annot_dir)
     outpath = Path(out_dir)
