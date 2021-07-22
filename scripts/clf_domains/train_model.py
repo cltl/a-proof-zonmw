@@ -87,8 +87,8 @@ def train(
 if __name__ == '__main__':
 
     argparser = argparse.ArgumentParser()
-    argparser.add_argument('--train_pkl', default='../../data/expr_july/domain_clf/train.pkl')
-    argparser.add_argument('--eval_pkl', default='../../data/expr_july/domain_clf/dev.pkl')
+    argparser.add_argument('--train_pkl', default='../../data/expr_july/clf_domains/train.pkl')
+    argparser.add_argument('--eval_pkl', default='../../data/expr_july/clf_domains/dev.pkl')
     argparser.add_argument('--config', default='config.json')
     argparser.add_argument('--model_args', default='domains_spacy_default')
     argparser.add_argument('--model_type', default='roberta')

@@ -67,7 +67,7 @@ def predict_df(
 if __name__ == '__main__':
 
     argparser = argparse.ArgumentParser()
-    argparser.add_argument('--data_pkl', default='../../data/expr_july/domain_clf/data.pkl')
+    argparser.add_argument('--data_pkl', default='../../data/expr_july/clf_domains/data.pkl')
     argparser.add_argument('--model_type', default='roberta')
     argparser.add_argument('--model_name', default='../../models/domains_spacy_default')
     args = argparser.parse_args()
