@@ -9,3 +9,4 @@ data/
 dummy_data/
 experiments/
 models/
+wandb/
