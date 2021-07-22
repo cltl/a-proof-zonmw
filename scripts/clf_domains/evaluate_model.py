@@ -1,15 +1,19 @@
 """
 Evaluate a fine-tuned multi-label classification model on a test set.
-Save evaluation metrics, model outputs, and wrong predictions.
-The evaluation metrics are saved in a `eval_results.txt` file in the model directory. Model outputs and wrong predictions are saved in the path indicated by the respective parameters.
+Save the following outputs:
+- evaluation metrics (LRAP, eval_loss):
+    saved in a `eval_results.txt` file in the model directory
+- model outputs, wrong predictions:
+    saved in the path indicated by the respective parameters
 """
 
 
 import argparse
 import pickle
+import warnings
+import torch
 import pandas as pd
 from simpletransformers.classification import MultiLabelClassificationModel
-from sklearn.metrics import f1_score, precision_score, recall_score, multilabel_confusion_matrix, hamming_loss
 
 
 def evaluate(
@@ -18,7 +22,6 @@ def evaluate(
     model_name,
     model_outputs_path,
     wrong_predictions_path,
-    labels=['ADM', 'ATT', 'BER', 'ENR', 'ETN', 'FAC', 'INS', 'MBW', 'STM'],
 ):
     """
     Evaluate a fine-tuned multi-label classification model on a test set.
@@ -48,18 +51,23 @@ def evaluate(
     # load data
     test_data = pd.read_pickle(test_pkl)
 
+    # check CUDA
+    cuda_available = torch.cuda.is_available()
+    if not cuda_available:
+        def custom_formatwarning(msg, *args, **kwargs):
+            return str(msg) + '\n'
+        warnings.formatwarning = custom_formatwarning
+        warnings.warn('CUDA device not available; running on a CPU!')
+
     # load model
-    model = MultiLabelClassificationModel(model_type, model_name)
+    model = MultiLabelClassificationModel(
+        model_type,
+        model_name,
+        use_cuda=cuda_available,
+    )
 
     # evaluate model
-    result, model_outputs, wrong_predictions = model.eval_model(
-        test_data,
-        precision=precision_score(y_true, y_pred, average='samples', labels=labels),
-        recall=recall_score(y_true, y_pred, average='samples', labels=labels),
-        f1_score=f1_score(y_true, y_pred, average='samples', labels=labels),
-        hamm_loss=hamming_loss(y_true, y_pred),
-        conf_matrix=multilabel_confusion_matrix(y_true, y_pred, labels=labels),
-    )
+    result, model_outputs, wrong_predictions = model.eval_model(test_data)
 
     # save evaluation outputs
     with open(model_outputs_path, 'wb') as f:
