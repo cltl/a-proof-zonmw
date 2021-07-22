@@ -5,6 +5,8 @@ The text is given in a pickled df and the predictions are generated per row and 
 
 
 import argparse
+import warnings
+import torch
 import pandas as pd
 from simpletransformers.classification import MultiLabelClassificationModel
 
@@ -35,8 +37,20 @@ def predict_df(
     # load data
     df = pd.read_pickle(data_pkl)
 
+    # check CUDA
+    cuda_available = torch.cuda.is_available()
+    if not cuda_available:
+        def custom_formatwarning(msg, *args, **kwargs):
+            return str(msg) + '\n'
+        warnings.formatwarning = custom_formatwarning
+        warnings.warn('CUDA device not available; running on a CPU!')
+
     # load model
-    model = MultiLabelClassificationModel(model_type, model_name)
+    model = MultiLabelClassificationModel(
+        model_type,
+        model_name,
+        use_cuda=cuda_available,
+    )
 
     # predict
     def predict(txt):
