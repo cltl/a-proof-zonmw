@@ -9,6 +9,7 @@ import warnings
 import torch
 import pandas as pd
 from simpletransformers.classification import MultiLabelClassificationModel
+from pathlib import Path
 
 
 def predict_df(
@@ -57,7 +58,8 @@ def predict_df(
         predictions, _ = model.predict([txt])
         return predictions
 
-    df['predictions'] = df['text'].apply(predict)
+    col = f"pred_{Path(model_name).stem}"
+    df[col] = df['text'].apply(predict)
 
     # pkl df
     df.to_pickle(data_pkl)
