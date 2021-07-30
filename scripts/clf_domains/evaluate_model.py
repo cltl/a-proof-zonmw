@@ -25,7 +25,7 @@ def evaluate(
 ):
     """
     Evaluate a fine-tuned multi-label classification model on a test set.
-    Save evaluation metrics in a `eval_results.txt` file in the model directory. The metrics include: Label Ranking Average Precision (LRAP), averaged precision, averaged recall, averaged F1-score, Hamming loss, and confusion matrix.
+    Save evaluation metrics in a `eval_results.txt` file in the model directory. The metrics include: Label Ranking Average Precision (LRAP) and eval_loss.
     Save model outputs and wrong predictions in pickled files at `model_outputs_path` and `wrong_predictions_path`.
 
     Parameters
