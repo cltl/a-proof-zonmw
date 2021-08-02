@@ -10,7 +10,7 @@ import json
 import torch
 import wandb
 import pandas as pd
-from simpletransformers.ner import MultiLabelClassificationModel
+from simpletransformers.classification import MultiLabelClassificationModel
 
 
 def main(
@@ -82,7 +82,7 @@ def main(
             use_cuda=cuda_available,
         )
 
-        model.train_model(train_data, eval_data=eval_data)
+        model.train_model(train_data, eval_df=eval_data)
 
         wandb.join()
 
