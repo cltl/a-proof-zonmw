@@ -79,7 +79,7 @@ def train(
 
     # train
     if model.args.evaluate_during_training:
-        model.train_model(train_data, eval_data=eval_data)
+        model.train_model(train_data, eval_df=eval_data)
     else:
         model.train_model(train_data)
 

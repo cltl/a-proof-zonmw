@@ -40,8 +40,6 @@ def evaluate(
         path to save the pickled model outputs
     wrong_predictions_path: str
         path to save the pickled wrong predictions
-    labels: list
-        list of column indices for the multi-hot labels
 
     Returns
     -------
