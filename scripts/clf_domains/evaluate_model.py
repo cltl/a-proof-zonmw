@@ -81,8 +81,8 @@ if __name__ == '__main__':
     argparser.add_argument('--test_pkl', default='../../data/expr_july/clf_domains/test.pkl')
     argparser.add_argument('--model_type', default='roberta')
     argparser.add_argument('--model_name', default='../../models/domains_spacy_default')
-    argparser.add_argument('--model_outputs', default='"../../models/domains_spacy_default/model_outputs_test.pkl')
-    argparser.add_argument('--wrong_predictions', default='"../../models/domains_spacy_default/wrong_predictions_test.pkl')
+    argparser.add_argument('--model_outputs', default='../../models/domains_spacy_default/model_outputs_test.pkl')
+    argparser.add_argument('--wrong_predictions', default='../../models/domains_spacy_default/wrong_predictions_test.pkl')
     args = argparser.parse_args()
 
     evaluate(

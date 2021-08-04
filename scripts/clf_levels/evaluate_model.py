@@ -88,8 +88,8 @@ if __name__ == '__main__':
     argparser.add_argument('--test_pkl', default='../../data/expr_july/clf_levels_ADM/test.pkl')
     argparser.add_argument('--model_type', default='roberta')
     argparser.add_argument('--model_name', default='../../models/levels_adm_notes')
-    argparser.add_argument('--model_outputs', default='"../../models/levels_adm_notes/model_outputs_test.pkl')
-    argparser.add_argument('--wrong_predictions', default='"../../models/levels_adm_notes/wrong_predictions_test.pkl')
+    argparser.add_argument('--model_outputs', default='../../models/levels_adm_notes/model_outputs_test.pkl')
+    argparser.add_argument('--wrong_predictions', default='../../models/levels_adm_notes/wrong_predictions_test.pkl')
     args = argparser.parse_args()
 
     evaluate(
