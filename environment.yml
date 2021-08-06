@@ -9,16 +9,16 @@ dependencies:
   - scikit-learn=0.23.2
   - openpyxl=3.0.6
   - spacy=3.0.3
-  - jupyter
+  - jupyter=1.0.0
   - jupyterlab=2.2.6
   - ipykernel=5.3.4
   - matplotlib=3.3.4
-  - tqdm=4.59
-  - pytorch=1.8
+  - tqdm=4.49.0
+  - pytorch=1.8.1
   - cudatoolkit=10.2
-  - requests=2.25
-  - tensorboardx
-  - wandb
-  - pip
+  - requests=2.25.1
+  - tensorboardx=2.3
+  - wandb=0.10.33
+  - pip=20.3.3
   - pip:
-      - simpletransformers
+      - simpletransformers=0.61.9
