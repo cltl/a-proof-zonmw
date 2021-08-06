@@ -2,11 +2,9 @@ __pycache__/
 .ipynb_checkpoints/
 .vscode/
 
-create_env.sh
-tables/
-figures/
 data/
-dummy_data/
 experiments/
 models/
+tables/
+figures/
 wandb/
