@@ -11,6 +11,10 @@ import torch
 import pandas as pd
 from simpletransformers.classification import ClassificationModel
 
+import sys
+sys.path.insert(0, '..')
+from utils.config import PATHS
+
 
 def train(
     train_pkl,
@@ -84,19 +88,25 @@ def train(
 if __name__ == '__main__':
 
     argparser = argparse.ArgumentParser()
-    argparser.add_argument('--train_pkl', default='../../data/expr_july/clf_levels_ADM/train.pkl')
-    argparser.add_argument('--eval_pkl', default='../../data/expr_july/clf_levels_ADM/dev.pkl')
+    argparser.add_argument('--datapath', default='data_expr_july')
+    argparser.add_argument('--train_pkl', default='clf_levels_ADM/train.pkl')
+    argparser.add_argument('--eval_pkl', default='clf_levels_ADM/dev.pkl')
     argparser.add_argument('--config', default='config.json')
     argparser.add_argument('--model_args', default='levels_adm_notes')
     argparser.add_argument('--model_type', default='roberta')
-    argparser.add_argument('--model_name', default='../../models/clin_nl_from_scratch/')
+    argparser.add_argument('--modelpath', default='models')
+    argparser.add_argument('--model_name', default='clin_nl_from_scratch')
     args = argparser.parse_args()
 
+    train_pkl = PATHS.getpath(args.datapath) / args.train_pkl
+    eval_pkl = PATHS.getpath(args.datapath) / args.eval_pkl
+    model_name = PATHS.getpath(args.modelpath) / args.model_name
+
     train(
-        args.train_pkl,
-        args.eval_pkl,
+        train_pkl,
+        eval_pkl,
         args.config,
         args.model_args,
         args.model_type,
-        args.model_name,
+        model_name,
     )

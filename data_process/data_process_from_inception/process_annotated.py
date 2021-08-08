@@ -28,6 +28,10 @@ import pandas as pd
 from pathlib import Path
 from functools import partial
 
+import sys
+sys.path.insert(0, '..')
+from utils.config import PATHS
+
 
 def filename_parser(tsv):
     """
@@ -235,17 +239,13 @@ def main(batch_dir, outfile, update_annotated, annotfile, legacy_parser=None, pa
     elif legacy_parser == 'legacy_stella':
         filename_parser = filename_parser_legacy_stella
 
-    # paths
-    batch_dir = Path(batch_dir)
-    outpath = batch_dir.parent / outfile
-
     # process tsv files in all subdirectories of batch_dir
     print(f"Processing tsv files in {batch_dir} ...")
     annotated = pd.concat((tsv_to_df(fp, filename_parser) for fp in batch_dir.glob('**/*.tsv')), ignore_index=True)
     print(f"DataFrame created: {annotated.shape=}")
 
-    annotated.to_pickle(outpath)
-    print(f"DataFrame saved to {outpath}")
+    annotated.to_pickle(outfile)
+    print(f"DataFrame saved to {outfile}")
 
     # save the id's of the annotated notes
     if update_annotated:
@@ -256,20 +256,25 @@ def main(batch_dir, outfile, update_annotated, annotfile, legacy_parser=None, pa
 if __name__ == '__main__':
 
     argparser = argparse.ArgumentParser()
-    argparser.add_argument('--batch_dir', default='../../data/from_inception_tsv/sample1')
+    argparser.add_argument('--datapath', default='data_from_inception_tsv')
+    argparser.add_argument('--batch_dir', default='sample1')
     argparser.add_argument('--outfile', default='annotated_df_sample1.pkl')
     argparser.add_argument('--no_update', dest='update_annotated', action='store_false')
-    argparser.add_argument('--annotfile', default='../../data/annotated_notes_ids.csv')
+    argparser.add_argument('--annotfile', default='annotated_notes_ids.csv')
     argparser.add_argument('--legacy_parser', default=None)
     argparser.add_argument('--path_to_raw', default=None)
     argparser.set_defaults(update_annotated=True)
     args = argparser.parse_args()
 
+    batch_dir = PATHS.getpath(args.datapath) / args.batch_dir
+    outfile = PATHS.getpath(args.datapath) / args.outfile
+    annotfile = PATHS.getpath(args.data) / args.annotfile
+
     main(
-        args.batch_dir,
-        args.outfile,
+        batch_dir,
+        outfile,
         args.update_annotated,
-        args.annotfile,
+        annotfile,
         args.legacy_parser,
         args.path_to_raw,
     )

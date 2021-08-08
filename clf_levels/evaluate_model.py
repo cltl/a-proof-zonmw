@@ -16,6 +16,10 @@ import pandas as pd
 from simpletransformers.classification import ClassificationModel
 from sklearn.metrics import mean_squared_error, mean_absolute_error
 
+import sys
+sys.path.insert(0, '..')
+from utils.config import PATHS
+
 
 def evaluate(
     test_pkl,
@@ -85,17 +89,24 @@ def evaluate(
 if __name__ == '__main__':
 
     argparser = argparse.ArgumentParser()
-    argparser.add_argument('--test_pkl', default='../../data/expr_july/clf_levels_ADM/test.pkl')
+    argparser.add_argument('--datapath', default='data_expr_july')
+    argparser.add_argument('--test_pkl', default='clf_levels_ADM/test.pkl')
     argparser.add_argument('--model_type', default='roberta')
-    argparser.add_argument('--model_name', default='../../models/levels_adm_notes')
-    argparser.add_argument('--model_outputs', default='../../models/levels_adm_notes/model_outputs_test.pkl')
-    argparser.add_argument('--wrong_predictions', default='../../models/levels_adm_notes/wrong_predictions_test.pkl')
+    argparser.add_argument('--modelpath', default='models')
+    argparser.add_argument('--model_name', default='levels_adm_notes')
+    argparser.add_argument('--model_outputs', default='model_outputs_test.pkl')
+    argparser.add_argument('--wrong_preds', default='wrong_preds_test.pkl')
     args = argparser.parse_args()
 
+    test_pkl = PATHS.getpath(args.datapath) / args.test_pkl
+    model_name = PATHS.getpath(args.modelpath) / args.model_name
+    model_outputs = PATHS.getpath(args.modelpath) / args.model_name / args.model_outputs
+    wrong_predictions = PATHS.getpath(args.modelpath) / args.model_name / args.wrong_preds
+
     evaluate(
-        args.test_pkl,
+        test_pkl,
         args.model_type,
-        args.model_name,
-        args.model_outputs,
-        args.wrong_predictions,
+        model_name,
+        model_outputs,
+        wrong_predictions,
     )

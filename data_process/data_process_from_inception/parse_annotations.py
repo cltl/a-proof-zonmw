@@ -11,6 +11,10 @@ import random
 import re
 import pandas as pd
 
+import sys
+sys.path.insert(0, '..')
+from utils.config import PATHS
+
 
 def categorize_tags(tagset):
     """
@@ -151,16 +155,22 @@ def main(tagset, infile, deduplicate, outfile):
 if __name__ == '__main__':
 
     argparser = argparse.ArgumentParser()
-    argparser.add_argument('--tagset', default='../../inception_config/tagset.json')
-    argparser.add_argument('--infile', default='../../data/from_inception_tsv/annotated_df_sample1.pkl')
-    argparser.add_argument('--outfile', default='../../data/from_inception_tsv/annotated_df_sample1_parsed.pkl')
+    argparser.add_argument('--rsrcpath', default='resources_inception_config')
+    argparser.add_argument('--tagset', default='tagset.json')
+    argparser.add_argument('--datapath', default='data_from_inception_tsv')
+    argparser.add_argument('--infile', default='annotated_df_sample1.pkl')
+    argparser.add_argument('--outfile', default='annotated_df_sample1_parsed.pkl')
     argparser.add_argument('--deduplicate', dest='deduplicate', action='store_true')
     argparser.set_defaults(deduplicate=False)
     args = argparser.parse_args()
 
+    tagset = PATHS.getpath(args.rsrcpath) / args.tagset
+    infile = PATHS.getpath(args.datapath) / args.infile
+    outfile = PATHS.getpath(args.datapath) / args.outfile
+
     main(
-        args.tagset,
-        args.infile,
+        tagset,
+        infile,
         args.deduplicate,
-        args.outfile,
+        outfile,
     )
