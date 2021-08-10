@@ -29,7 +29,7 @@ from pathlib import Path
 from functools import partial
 
 import sys
-sys.path.insert(0, '..')
+sys.path.insert(0, '../..')
 from utils.config import PATHS
 
 
