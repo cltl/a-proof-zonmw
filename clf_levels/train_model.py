@@ -89,8 +89,8 @@ if __name__ == '__main__':
 
     argparser = argparse.ArgumentParser()
     argparser.add_argument('--datapath', default='data_expr_july')
-    argparser.add_argument('--train_pkl', default='clf_levels_ADM/train.pkl')
-    argparser.add_argument('--eval_pkl', default='clf_levels_ADM/dev.pkl')
+    argparser.add_argument('--train_pkl', default='clf_levels_ADM_notes/train.pkl')
+    argparser.add_argument('--eval_pkl', default='clf_levels_ADM_notes/dev.pkl')
     argparser.add_argument('--config', default='config.json')
     argparser.add_argument('--model_args', default='levels_adm_notes')
     argparser.add_argument('--model_type', default='roberta')

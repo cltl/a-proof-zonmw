@@ -75,7 +75,7 @@ if __name__ == '__main__':
 
     argparser = argparse.ArgumentParser()
     argparser.add_argument('--datapath', default='data_expr_july')
-    argparser.add_argument('--data_pkl', default='clf_domains/test.pkl')
+    argparser.add_argument('--data_pkl', default='clf_levels_ADM_notes/test.pkl')
     argparser.add_argument('--model_type', default='roberta')
     argparser.add_argument('--modelpath', default='models')
     argparser.add_argument('--model_name', default='levels_adm_notes')

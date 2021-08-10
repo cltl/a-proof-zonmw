@@ -36,7 +36,7 @@ def evaluate(
     Parameters
     ----------
     test_pkl: str
-        path to pickled df with the training data, which must contain the columns 'text' and 'labels'; the labels are numeric values on a continuous scale
+        path to pickled df with the test data, which must contain the columns 'text' and 'labels'; the labels are numeric values on a continuous scale
     model_type: str
         type of the pre-trained model, e.g. bert, roberta, electra
     model_name: str
@@ -90,7 +90,7 @@ if __name__ == '__main__':
 
     argparser = argparse.ArgumentParser()
     argparser.add_argument('--datapath', default='data_expr_july')
-    argparser.add_argument('--test_pkl', default='clf_levels_ADM/test.pkl')
+    argparser.add_argument('--test_pkl', default='clf_levels_ADM_notes/test.pkl')
     argparser.add_argument('--model_type', default='roberta')
     argparser.add_argument('--modelpath', default='models')
     argparser.add_argument('--model_name', default='levels_adm_notes')
