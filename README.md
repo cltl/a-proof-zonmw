@@ -36,9 +36,9 @@ The repo is organized as follows:
 - `clf_domains`: scripts for training and evaluating a multi-label classification model that detects the 9 ICF domains. 
 - `clf_levels`: scripts for training and evaluating a regression model that assigns a level of functioning per domain.
 - `data_process`: scripts for various data processing tasks, incl. processing of raw data, data prep for annotation, processing annotations, etc.
+- `ml_evaluation`: scripts and notebooks for evaluation of the machine learning models.
 - `nb_data_analysis`: notebooks to generate descriptive statistics (tables and figures) about the data.
 - `nb_iaa`: notebooks for inter-annotator-agreement analysis.
-- `nb_ml_evaluation`: notebooks for evaluation of the machine learning models.
 - `resources`: files (json, xlsx) used for configuring the annotation environment and performing keyword searches in the data.
 - `utils`: general helper functions used throughout the repo.
 
