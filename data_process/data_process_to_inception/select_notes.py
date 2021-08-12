@@ -8,17 +8,17 @@ import pandas as pd
 
 def select_notes(
     data,
-    annotators    = ['avelli', 'katsburg', 'meskers', 'opsomer', 'swartjes', 'vervaart', 'ze_edith', 'ze_hinke', 'ze_ron'],
-    sources_other = ['2017', '2018', 'non_cov_2020'],
-    source_covid  = 'cov_2020',
-    n_files       = 60,
-    pct_covid     = 0.3,
-    pct_kwd       = 0.7,
-    domains       = ['ENR', 'ATT', 'STM', 'ADM', 'INS', 'MBW', 'FAC', 'BER', 'ETN'],
-    matched_domains = ['ATT', 'MBW', 'BER'],
-    min_matched_domains = 2,
-    n_iaa         = 3,
-    iaa_sources   = ['cov_2020'],
+    annotators,
+    sources_other,
+    source_covid,
+    n_files,
+    pct_covid,
+    pct_kwd,
+    domains,
+    matched_domains,
+    min_matched_domains,
+    n_iaa,
+    iaa_sources,
 ):
     """
     Select and return a batch of notes from `data` according to the specified parameters.

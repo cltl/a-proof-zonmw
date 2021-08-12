@@ -3,10 +3,8 @@ Functions for finding keyword matches in a dataframe with text and storing the r
 """
 
 
-import argparse
 import re
 import pandas as pd
-from pathlib import Path
 
 
 def get_regex(keyword, template):
