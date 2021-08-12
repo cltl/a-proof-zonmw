@@ -11,6 +11,10 @@ import re
 import pandas as pd
 from pathlib import Path
 
+import sys
+sys.path.insert(0, '../..')
+from utils.config import PATHS
+
 HERE = Path(__file__).resolve().parent
 with open(HERE / 'config.data_load.json', 'r', encoding='utf8') as f:
     DATA_LOAD_SETTINGS = json.load(f)
@@ -20,7 +24,7 @@ def raw_to_df(datapath):
     """
     Combine and preprocess all raw data files in `datapath` into a single dataframe.
     There are default settings for the `pd.read_csv` function; these defaults may be overwritten by the settings in the `config.data_load.json` (this is necessary due to differences in raw data formats).
-    
+
     Processing steps:
     (1) combine all csv files from the same institution
     (2) drop any duplicated rows
@@ -34,7 +38,7 @@ def raw_to_df(datapath):
     ----------
     datapath: Path
         path to raw data
-    
+
     Returns
     -------
     DataFrame
@@ -75,7 +79,7 @@ def raw_to_df(datapath):
 
 if __name__ == '__main__':
 
-    path = Path('../../data')
+    datapath = PATHS.getpath('data')
     data_dirs = [
         '2017_raw',
         '2018_raw',
@@ -83,5 +87,5 @@ if __name__ == '__main__':
     ]
 
     for datadir in data_dirs:
-        df = raw_to_df(path / datadir)
-        df.to_pickle(path / datadir / 'processed.pkl')
+        df = raw_to_df(datapath / datadir)
+        df.to_pickle(datapath / datadir / 'processed.pkl')

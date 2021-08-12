@@ -7,6 +7,10 @@ import argparse
 import pandas as pd
 from pathlib import Path
 
+import sys
+sys.path.insert(0, '../..')
+from utils.config import PATHS
+
 
 def main(datapath, outpath, icd10):
     """
@@ -14,8 +18,6 @@ def main(datapath, outpath, icd10):
     """
 
     ### PATHS ###
-    datapath = Path(datapath)
-    outpath = Path(outpath)
     outpath.mkdir(exist_ok=True, parents=True)
 
 
@@ -51,13 +53,16 @@ def main(datapath, outpath, icd10):
 if __name__ == '__main__':
 
     argparser = argparse.ArgumentParser()
-    argparser.add_argument('--datapath', default='../../data/2020_raw')
-    argparser.add_argument('--outpath', default='../../data/2020_raw/ICD_U07.1')
+    argparser.add_argument('--datapath', default='data_2020_raw')
+    argparser.add_argument('--outpath', default='ICD_U07.1')
     argparser.add_argument('--icd10', default='COVID-19, virus geïdentificeerd [U07.1]')
     args = argparser.parse_args()
 
+    datapath = PATHS.getpath(args.datapath)
+    outpath = datapath / args.outpath
+
     main(
-        args.datapath,
-        args.outpath,
+        datapath,
+        outpath,
         args.icd10,
     )
