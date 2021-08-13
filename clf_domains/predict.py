@@ -77,7 +77,7 @@ if __name__ == '__main__':
     argparser.add_argument('--data_pkl', default='clf_domains/test.pkl')
     argparser.add_argument('--model_type', default='roberta')
     argparser.add_argument('--modelpath', default='models')
-    argparser.add_argument('--model_name', default='domains_spacy_default')
+    argparser.add_argument('--model_name', default='domains_baseline')
     args = argparser.parse_args()
 
     data_pkl = PATHS.getpath(args.datapath) / args.data_pkl

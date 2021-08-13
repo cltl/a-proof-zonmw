@@ -95,7 +95,7 @@ if __name__ == '__main__':
     argparser.add_argument('--train_pkl', default='clf_domains/train.pkl')
     argparser.add_argument('--eval_pkl', default='clf_domains/dev.pkl')
     argparser.add_argument('--model_config', default='config.json')
-    argparser.add_argument('--model_args', default='domains_spacy_default')
+    argparser.add_argument('--model_args', default='domains_baseline')
     argparser.add_argument('--model_type', default='roberta')
     argparser.add_argument('--modelpath', default='models')
     argparser.add_argument('--model_name', default='clin_nl_from_scratch')

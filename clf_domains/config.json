@@ -1,8 +1,8 @@
 {
-    "domains_spacy_default": {
+    "domains_baseline": {
         "max_seq_length": 512,
-        "output_dir": "../../models/domains_spacy_default/",
-        "best_model_dir": "../../models/domains_spacy_default/best_model/",
+        "output_dir": "../../models/domains_baseline/",
+        "best_model_dir": "../../models/domains_baseline/best_model/",
         "tensorboard_dir": "../../models/runs/",
         "cache_dir": "../../models/cache_dir/",
         "wandb_project": "domains_spacy",
@@ -10,10 +10,10 @@
         "silent": true,
         "manual_seed": 19
     },
-    "domains_spacy_default_excl_bck": {
+    "domains_excl_bck": {
         "max_seq_length": 512,
-        "output_dir": "../../models/domains_spacy_default_excl_bck/",
-        "best_model_dir": "../../models/domains_spacy_default_excl_bck/best_model/",
+        "output_dir": "../../models/domains_excl_bck/",
+        "best_model_dir": "../../models/domains_excl_bck/best_model/",
         "tensorboard_dir": "../../models/runs/",
         "cache_dir": "../../models/cache_dir/",
         "wandb_project": "domains_spacy_excl_bck",
