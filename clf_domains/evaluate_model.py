@@ -92,7 +92,7 @@ if __name__ == '__main__':
     args = argparser.parse_args()
 
     test_pkl = PATHS.getpath(args.datapath) / args.test_pkl
-    model_name = PATHS.getpath(args.modelpath) / args.model_name
+    model_name = str(PATHS.getpath(args.modelpath) / args.model_name)
     model_outputs = PATHS.getpath(args.modelpath) / args.model_name / args.model_outputs
     wrong_predictions = PATHS.getpath(args.modelpath) / args.model_name / args.wrong_preds
 

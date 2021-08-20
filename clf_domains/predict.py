@@ -81,7 +81,7 @@ if __name__ == '__main__':
     args = argparser.parse_args()
 
     data_pkl = PATHS.getpath(args.datapath) / args.data_pkl
-    model_name = PATHS.getpath(args.modelpath) / args.model_name
+    model_name = str(PATHS.getpath(args.modelpath) / args.model_name)
 
     predict_df(
         data_pkl,

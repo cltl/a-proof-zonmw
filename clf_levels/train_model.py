@@ -100,7 +100,7 @@ if __name__ == '__main__':
 
     train_pkl = PATHS.getpath(args.datapath) / args.train_pkl
     eval_pkl = PATHS.getpath(args.datapath) / args.eval_pkl
-    model_name = PATHS.getpath(args.modelpath) / args.model_name
+    model_name = str(PATHS.getpath(args.modelpath) / args.model_name)
 
     train(
         train_pkl,
