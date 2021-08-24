@@ -1,5 +1,9 @@
 """
-Fine-tune and save a regression model with Simple Transformers.
+Fine-tune and save regression models for levels (per domain) with Simple Transformers.
+
+By default, models for all 9 domains are trained; if you want to only select a subset, you can pass the names of the chosen domains under the --doms parameter:
+
+$ python train_model.py --doms ATT INS FAC
 """
 
 
@@ -89,24 +93,25 @@ if __name__ == '__main__':
 
     argparser = argparse.ArgumentParser()
     argparser.add_argument('--datapath', default='data_expr_july')
-    argparser.add_argument('--train_pkl', default='clf_levels_ADM_notes/train.pkl')
-    argparser.add_argument('--eval_pkl', default='clf_levels_ADM_notes/dev.pkl')
+    argparser.add_argument('--doms', nargs='*', default=['ADM', 'ATT', 'BER', 'ENR', 'ETN', 'FAC', 'INS', 'MBW', 'STM'])
     argparser.add_argument('--config', default='config.json')
-    argparser.add_argument('--model_args', default='levels_adm_notes')
     argparser.add_argument('--model_type', default='roberta')
     argparser.add_argument('--modelpath', default='models')
     argparser.add_argument('--model_name', default='clin_nl_from_scratch')
     args = argparser.parse_args()
 
-    train_pkl = PATHS.getpath(args.datapath) / args.train_pkl
-    eval_pkl = PATHS.getpath(args.datapath) / args.eval_pkl
-    model_name = str(PATHS.getpath(args.modelpath) / args.model_name)
+    for dom in args.doms:
+        train_pkl = PATHS.getpath(args.datapath) / f"clf_levels_{dom}_sents/train.pkl"
+        eval_pkl = PATHS.getpath(args.datapath) / f"clf_levels_{dom}_sents/dev.pkl"
+        model_args = f"levels_{dom.lower()}_sents"
+        model_name = str(PATHS.getpath(args.modelpath) / args.model_name)
 
-    train(
-        train_pkl,
-        eval_pkl,
-        args.config,
-        args.model_args,
-        args.model_type,
-        model_name,
-    )
+        print(f"TRAINING {model_args}")
+        train(
+            train_pkl,
+            eval_pkl,
+            args.config,
+            model_args,
+            args.model_type,
+            model_name,
+        )
