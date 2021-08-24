@@ -1,6 +1,10 @@
 """
 Apply a fine-tuned regression model to generate predictions.
 The text is given in a pickled df and the predictions are generated per row and saved in a new 'predictions' column.
+
+By default, predictions are generated for all 9 domains; if you want to only select a subset, you can pass the names of the chosen domains under the --doms parameter:
+
+$ python evaluate_model.py --doms ATT INS FAC
 """
 
 
@@ -75,11 +79,14 @@ if __name__ == '__main__':
 
     argparser = argparse.ArgumentParser()
     argparser.add_argument('--datapath', default='data_expr_july')
-    argparser.add_argument('--data_pkl', default='clf_levels_ADM_notes/test.pkl')
+    argparser.add_argument('--doms', nargs='*', default=['ADM', 'ATT', 'BER', 'ENR', 'ETN', 'FAC', 'INS', 'MBW', 'STM'])
     argparser.add_argument('--model_type', default='roberta')
     argparser.add_argument('--modelpath', default='models')
-    argparser.add_argument('--model_name', default='levels_adm_notes')
     args = argparser.parse_args()
+
+    for dom in args.doms:
+        data_pkl = PATHS.getpath(args.datapath) / f"clf_levels_{dom}_sents/test_dom_output.pkl"
+        model_name = PATHS.getpath(args.modelpath) / f"levels_{dom.lower()}_sents"
 
     data_pkl = PATHS.getpath(args.datapath) / args.data_pkl
     model_name = str(PATHS.getpath(args.modelpath) / args.model_name)
