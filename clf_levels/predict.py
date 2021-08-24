@@ -88,11 +88,8 @@ if __name__ == '__main__':
         data_pkl = PATHS.getpath(args.datapath) / f"clf_levels_{dom}_sents/test_dom_output.pkl"
         model_name = PATHS.getpath(args.modelpath) / f"levels_{dom.lower()}_sents"
 
-    data_pkl = PATHS.getpath(args.datapath) / args.data_pkl
-    model_name = str(PATHS.getpath(args.modelpath) / args.model_name)
-
-    predict_df(
-        data_pkl,
-        args.model_type,
-        model_name,
-    )
+        predict_df(
+            data_pkl,
+            args.model_type,
+            model_name,
+        )
