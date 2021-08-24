@@ -1,10 +1,16 @@
 """
-Evaluate a fine-tuned regression model on a test set.
-Save the following outputs:
-- evaluation metrics (MSE, RMSE, MAE, eval_loss):
-    saved in a `eval_results.txt` file in the model directory
-- model outputs, wrong predictions:
-    saved in the path indicated by the respective parameters
+Evaluate fine-tuned regression models on two test sets:
+- sentences with gold levels labels (test.pkl)
+- sentences that were assigned a domain label by the domains classifier and do not necessarily have a gold label (test_dom_output.pkl)
+
+Save the following outputs per model:
+- evaluation metrics: MSE, RMSE, MAE, eval_loss
+- model outputs
+- wrong predictions
+
+By default, models for all 9 domains are evaluated; if you want to only select a subset, you can pass the names of the chosen domains under the --doms parameter:
+
+$ python evaluate_model.py --doms ATT INS FAC
 """
 
 
@@ -25,13 +31,11 @@ def evaluate(
     test_pkl,
     model_type,
     model_name,
-    model_outputs_path,
-    wrong_predictions_path,
+    output_dir,
 ):
     """
     Evaluate a fine-tuned regression model on a test set.
-    Save evaluation metrics in a `eval_results.txt` file in the model directory. The metrics include: MSE, RMSE, MAE and eval_loss.
-    Save model outputs and wrong predictions in pickled files at `model_outputs_path` and `wrong_predictions_path`.
+    Save evaluation metrics, model outputs and wrong predictions in `output_dir`. The evaluation metrics include: MSE, RMSE, MAE and eval_loss.
 
     Parameters
     ----------
@@ -41,10 +45,8 @@ def evaluate(
         type of the pre-trained model, e.g. bert, roberta, electra
     model_name: str
         path to a directory containing model file
-    model_outputs_path: str
-        path to save the pickled model outputs
-    wrong_predictions_path: str
-        path to save the pickled wrong predictions
+    output_dir: Path
+        path to a directory where outputs should be saved
 
     Returns
     -------
@@ -73,15 +75,18 @@ def evaluate(
     # evaluate model
     result, model_outputs, wrong_predictions = model.eval_model(
         test_data,
+        output_dir=str(output_dir),
         mae=mean_absolute_error,
         mse=mean_squared_error,
         rmse=lambda y_true, y_pred: mean_squared_error(y_true, y_pred, squared=False),
     )
 
     # save evaluation outputs
+    model_outputs_path = output_dir / 'model_outputs.pkl'
     with open(model_outputs_path, 'wb') as f:
         pickle.dump(model_outputs, f)
 
+    wrong_predictions_path = output_dir / 'wrong_preds.pkl'
     with open(wrong_predictions_path, 'wb') as f:
         pickle.dump(wrong_predictions, f)
 
@@ -90,23 +95,30 @@ if __name__ == '__main__':
 
     argparser = argparse.ArgumentParser()
     argparser.add_argument('--datapath', default='data_expr_july')
-    argparser.add_argument('--test_pkl', default='clf_levels_ADM_notes/test.pkl')
+    argparser.add_argument('--doms', nargs='*', default=['ADM', 'ATT', 'BER', 'ENR', 'ETN', 'FAC', 'INS', 'MBW', 'STM'])
     argparser.add_argument('--model_type', default='roberta')
     argparser.add_argument('--modelpath', default='models')
-    argparser.add_argument('--model_name', default='levels_adm_notes')
-    argparser.add_argument('--model_outputs', default='model_outputs_test.pkl')
-    argparser.add_argument('--wrong_preds', default='wrong_preds_test.pkl')
     args = argparser.parse_args()
 
-    test_pkl = PATHS.getpath(args.datapath) / args.test_pkl
-    model_name = str(PATHS.getpath(args.modelpath) / args.model_name)
-    model_outputs = PATHS.getpath(args.modelpath) / args.model_name / args.model_outputs
-    wrong_predictions = PATHS.getpath(args.modelpath) / args.model_name / args.wrong_preds
+    for dom in args.doms:
+        test_pkl = PATHS.getpath(args.datapath) / f"clf_levels_{dom}_sents/test.pkl"
+        test_dom_output_pkl = PATHS.getpath(args.datapath) / f"clf_levels_{dom}_sents/test_dom_output.pkl"
+        model_name = PATHS.getpath(args.modelpath) / f"levels_{dom.lower()}_sents"
+        test_output_dir = model_name / 'eval_test'
+        test_dom_output_dir = model_name / 'eval_test_dom_output'
 
-    evaluate(
-        test_pkl,
-        args.model_type,
-        model_name,
-        model_outputs,
-        wrong_predictions,
-    )
+        print(f"Evaluating {model_name} on test.pkl")
+        evaluate(
+            test_pkl,
+            args.model_type,
+            str(model_name),
+            test_output_dir,
+        )
+
+        print(f"Evaluating {model_name} on test_dom_output.pkl")
+        evaluate(
+            test_dom_output_pkl,
+            args.model_type,
+            str(model_name),
+            test_dom_output_dir,
+        )
