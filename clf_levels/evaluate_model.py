@@ -1,7 +1,5 @@
 """
-Evaluate fine-tuned regression models on two test sets:
-- sentences with gold levels labels (test.pkl)
-- sentences that were assigned a domain label by the domains classifier and do not necessarily have a gold label (test_dom_output.pkl)
+Evaluate fine-tuned regression models on a test set.
 
 Save the following outputs per model:
 - evaluation metrics: MSE, RMSE, MAE, eval_loss
@@ -102,10 +100,8 @@ if __name__ == '__main__':
 
     for dom in args.doms:
         test_pkl = PATHS.getpath(args.datapath) / f"clf_levels_{dom}_sents/test.pkl"
-        test_dom_output_pkl = PATHS.getpath(args.datapath) / f"clf_levels_{dom}_sents/test_dom_output.pkl"
         model_name = PATHS.getpath(args.modelpath) / f"levels_{dom.lower()}_sents"
         test_output_dir = model_name / 'eval_test'
-        test_dom_output_dir = model_name / 'eval_test_dom_output'
 
         print(f"Evaluating {model_name} on test.pkl")
         evaluate(
@@ -113,12 +109,4 @@ if __name__ == '__main__':
             args.model_type,
             str(model_name),
             test_output_dir,
-        )
-
-        print(f"Evaluating {model_name} on test_dom_output.pkl")
-        evaluate(
-            test_dom_output_pkl,
-            args.model_type,
-            str(model_name),
-            test_dom_output_dir,
         )
