@@ -56,8 +56,8 @@ if __name__ == '__main__':
 
     argparser = argparse.ArgumentParser()
     argparser.add_argument('--datapath', default='data_expr_july')
-    argparser.add_argument('--doms', nargs='*', default=['ADM', 'ATT', 'ENR', 'ETN', 'FAC', 'INS', 'MBW', 'STM'])
-    argparser.add_argument('--testfile', default='test_dom_output')
+    argparser.add_argument('--doms', nargs='*', default=['ADM', 'ATT', 'BER', 'ENR', 'ETN', 'FAC', 'INS', 'MBW', 'STM'])
+    argparser.add_argument('--testfile', default='test')
     args = argparser.parse_args()
 
     for dom in args.doms:
