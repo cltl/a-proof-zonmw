@@ -2,6 +2,10 @@
 Process sentence-level predictions of a regression model to generate evaluation metrics on a note-level.
 The note-level labels (gold and predictions) are a mean of the sentence-level labels belonging to the same note.
 The evaluation metrics include: mean absolute error, mean squared error, root mean squared error.
+
+By default, metrics are generated for all 9 domains; if you want to only select a subset, you can pass the names of the chosen domains under the --doms parameter:
+
+$ python evaluate_model.py --doms ATT INS FAC
 """
 
 
@@ -39,7 +43,10 @@ def evaluate(test_pkl, pred_col):
     labels = test.groupby('NotitieID').labels.mean()
     preds = test.groupby('NotitieID')[pred_col].mean()
     df = pd.concat([labels, preds], axis=1)
-
+    print(f"Number of notes in the test set: {len(df)}")
+    df = df.dropna()
+    print(f"Number of notes with a gold label: {len(df)}")
+    
     print(f"mae: {mean_absolute_error(df.labels, df[pred_col]).round(2)}")
     print(f"mse: {mean_squared_error(df.labels, df[pred_col]).round(2)}")
     print(f"rmse: {mean_squared_error(df.labels, df[pred_col], squared=False).round(2)}")
@@ -49,10 +56,13 @@ if __name__ == '__main__':
 
     argparser = argparse.ArgumentParser()
     argparser.add_argument('--datapath', default='data_expr_july')
-    argparser.add_argument('--testdir', default='clf_levels_ADM_sents')
-    argparser.add_argument('--pred_col', default='pred_levels_adm_sents')
+    argparser.add_argument('--doms', nargs='*', default=['ADM', 'ATT', 'ENR', 'ETN', 'FAC', 'INS', 'MBW', 'STM'])
+    argparser.add_argument('--testfile', default='test_dom_output')
     args = argparser.parse_args()
 
-    test_pkl = PATHS.getpath(args.datapath) / args.testdir / 'test.pkl'
+    for dom in args.doms:
+        test_pkl = PATHS.getpath(args.datapath) / f"clf_levels_{dom}_sents/{args.testfile}.pkl"
+        pred_col = f"pred_levels_{dom.lower()}_sents"
 
-    evaluate(test_pkl, args.pred_col)
+        print(f"Note-level metrics for {dom}_{args.testfile}:")
+        evaluate(test_pkl, pred_col)
