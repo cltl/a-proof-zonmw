@@ -1,11 +1,12 @@
 """
-Contains the `raw_to_df` function for combining and preprocessing raw data.
-When ran as script will combine and preprocess raw data from:
-    - 2017_raw
-    - 2018_raw
-    - 2020_raw
+Process raw data csv's in a directory and save the combined data in a pickled DataFrame.
+
+By default, all raw data folders defined in the config json are processed; if you want to only select a subset, you can pass the names of the chosen directories under the --datadirs parameter:
+
+$ python preprocess_raw_data.py --datadirs 2018_raw 2020_raw
 """
 
+import argparse
 import json
 import re
 import pandas as pd
@@ -79,13 +80,15 @@ def raw_to_df(datapath):
 
 if __name__ == '__main__':
 
+    argparser = argparse.ArgumentParser()
+    argparser.add_argument(
+        '--datadirs',
+        nargs='*',
+        default=DATA_LOAD_SETTINGS.keys(),
+    )
+    args = argparser.parse_args()
+    
     datapath = PATHS.getpath('data')
-    data_dirs = [
-        '2017_raw',
-        '2018_raw',
-        '2020_raw',
-    ]
-
-    for datadir in data_dirs:
+    for datadir in args.datadirs:
         df = raw_to_df(datapath / datadir)
         df.to_pickle(datapath / datadir / 'processed.pkl')
