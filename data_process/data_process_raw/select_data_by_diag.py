@@ -53,12 +53,12 @@ def main(datapath, outpath, icd10):
 if __name__ == '__main__':
 
     argparser = argparse.ArgumentParser()
-    argparser.add_argument('--datapath', default='data_2020_raw')
+    argparser.add_argument('--datadir', default='2020-Q4_2021-Q1_raw')
     argparser.add_argument('--outpath', default='ICD_U07.1')
     argparser.add_argument('--icd10', default='COVID-19, virus geïdentificeerd [U07.1]')
     args = argparser.parse_args()
 
-    datapath = PATHS.getpath(args.datapath)
+    datapath = PATHS.getpath('data') / args.datadir
     outpath = datapath / args.outpath
 
     main(
