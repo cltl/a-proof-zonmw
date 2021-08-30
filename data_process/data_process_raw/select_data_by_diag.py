@@ -12,7 +12,7 @@ sys.path.insert(0, '../..')
 from utils.config import PATHS
 
 
-def main(datapath, outpath, icd10):
+def main(datapath, outpath, outfile, icd10):
     """
     Select notes belonging to patients with a specific ICD_10 diagnosis and save them to a pickled dataframe.
     """
@@ -45,7 +45,7 @@ def main(datapath, outpath, icd10):
     crit = notes.MDN.isin(diag.query(query).MDN.unique())
     selected = notes.loc[crit]
 
-    outfile = outpath / f"notes_{diag_code}_2020_q1_q2_q3.pkl"
+    outfile = outpath / f"{outfile}.pkl"
     selected.to_pickle(outfile)
     print(f"Selection saved to {outfile.stem}")
 
@@ -54,7 +54,8 @@ if __name__ == '__main__':
 
     argparser = argparse.ArgumentParser()
     argparser.add_argument('--datadir', default='2020-Q4_2021-Q1_raw')
-    argparser.add_argument('--outpath', default='ICD_U07.1')
+    argparser.add_argument('--outdir', default='ICD_U07.1')
+    argparser.add_argument('--outfile', default='notes_[U07.1]_2020_q4_2021_q1')
     argparser.add_argument('--icd10', default='COVID-19, virus geïdentificeerd [U07.1]')
     args = argparser.parse_args()
 
@@ -64,5 +65,6 @@ if __name__ == '__main__':
     main(
         datapath,
         outpath,
+        args.outfile,
         args.icd10,
     )
