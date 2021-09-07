@@ -257,8 +257,8 @@ if __name__ == '__main__':
 
     argparser = argparse.ArgumentParser()
     argparser.add_argument('--datapath', default='data_from_inception_tsv')
-    argparser.add_argument('--batch_dir', default='sample1')
-    argparser.add_argument('--outfile', default='annotated_df_sample1.pkl')
+    argparser.add_argument('--batch_dir', default='week_22-26')
+    argparser.add_argument('--outfile', default='annotated_df_week_22-26.pkl')
     argparser.add_argument('--no_update', dest='update_annotated', action='store_false')
     argparser.add_argument('--annotfile', default='annotated_notes_ids.csv')
     argparser.add_argument('--legacy_parser', default=None)
@@ -268,7 +268,7 @@ if __name__ == '__main__':
 
     batch_dir = PATHS.getpath(args.datapath) / args.batch_dir
     outfile = PATHS.getpath(args.datapath) / args.outfile
-    annotfile = PATHS.getpath(args.data) / args.annotfile
+    annotfile = PATHS.getpath('data') / args.annotfile
 
     main(
         batch_dir,
