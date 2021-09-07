@@ -99,11 +99,18 @@ if __name__ == '__main__':
     argparser.add_argument('--model_type', default='roberta')
     argparser.add_argument('--modelpath', default='models')
     argparser.add_argument('--model_name', default='clin_nl_from_scratch')
+    argparser.add_argument('--hf', dest='hugging_face', action='store_true')
+    argparser.set_defaults(hugging_face=False)
     args = argparser.parse_args()
 
     train_pkl = PATHS.getpath(args.datapath) / args.train_pkl
     eval_pkl = PATHS.getpath(args.datapath) / args.eval_pkl
+    
+    # model stored locally (default) or on HuggingFace (--hf)
     model_name = str(PATHS.getpath(args.modelpath) / args.model_name)
+    if args.hugging_face:
+        model_name = args.model_name
+    
 
     train(
         train_pkl,
