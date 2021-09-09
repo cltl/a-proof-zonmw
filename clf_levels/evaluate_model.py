@@ -1,14 +1,22 @@
 """
-Evaluate fine-tuned regression models on a test set.
+Evaluate fine-tuned regression models on an evaluation set.
 
 Save the following outputs per model:
 - evaluation metrics: MSE, RMSE, MAE, eval_loss
 - model outputs
 - wrong predictions
 
-By default, models for all 9 domains are evaluated; if you want to only select a subset, you can pass the names of the chosen domains under the --doms parameter:
+The script can be customized with the following parameters:
+    --datapath: data dir
+    --doms: the domains for which models are evaluated
+    --model_type: type of the pre-trained model, e.g. bert, roberta, electra
+    --modelpath: models dir
+    --clas_unit: classification unit ('sent' or 'note')
+    --eval_on: name of the file with the eval data
 
-$ python evaluate_model.py --doms ATT INS FAC
+To change the default values of a parameter, pass it in the command line, e.g.:
+
+$ python evaluate_model.py --doms ATT INS FAC --clas_unit note
 """
 
 
@@ -92,18 +100,20 @@ def evaluate(
 if __name__ == '__main__':
 
     argparser = argparse.ArgumentParser()
-    argparser.add_argument('--datapath', default='data_expr_july')
+    argparser.add_argument('--datapath', default='data_expr_july', help='must be listed as a key in /config.ini')
     argparser.add_argument('--doms', nargs='*', default=['ADM', 'ATT', 'BER', 'ENR', 'ETN', 'FAC', 'INS', 'MBW', 'STM'])
     argparser.add_argument('--model_type', default='roberta')
     argparser.add_argument('--modelpath', default='models')
+    argparser.add_argument('--clas_unit', default='sent')
+    argparser.add_argument('--eval_on', default='dev')
     args = argparser.parse_args()
 
     for dom in args.doms:
-        test_pkl = PATHS.getpath(args.datapath) / f"clf_levels_{dom}_sents/test.pkl"
-        model_name = PATHS.getpath(args.modelpath) / f"levels_{dom.lower()}_sents"
-        test_output_dir = model_name / 'eval_test'
+        test_pkl = PATHS.getpath(args.datapath) / f"clf_levels_{dom}_{args.clas_unit}s/{args.eval_on}.pkl"
+        model_name = PATHS.getpath(args.modelpath) / f"levels_{dom.lower()}_{args.clas_unit}s"
+        test_output_dir = model_name / f'eval_{args.eval_on}'
 
-        print(f"Evaluating {model_name} on test.pkl")
+        print(f"Evaluating {model_name} on {args.eval_on}.pkl")
         evaluate(
             test_pkl,
             args.model_type,

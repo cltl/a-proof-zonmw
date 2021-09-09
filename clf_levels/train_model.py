@@ -1,9 +1,21 @@
 """
-Fine-tune and save regression models for levels (per domain) with Simple Transformers.
+Fine-tune and save regression models predicting functioning levels per domain with Simple Transformers.
 
-By default, models for all 9 domains are trained; if you want to only select a subset, you can pass the names of the chosen domains under the --doms parameter:
+The script can be customized with the following parameters:
+    --datapath: data dir
+    --doms: the domains for which models are trained
+    --config: json file containing the model args
+    --model_type: type of the pre-trained model, e.g. bert, roberta, electra
+    --modelpath: models dir
+    --model_name: the pre-trained model, either from Hugging Face or locally stored
+    --hf: pass this parameter if a model from Hugging Face is used
+    --clas_unit: classification unit ('sent' or 'note')
+    --train_on: name of the file with the train data
+    --eval_on: name of the file with the eval data
 
-$ python train_model.py --doms ATT INS FAC
+To change the default values of a parameter, pass it in the command line, e.g.:
+
+$ python train_model.py --doms ATT INS FAC --clas_unit note
 """
 
 
@@ -92,19 +104,29 @@ def train(
 if __name__ == '__main__':
 
     argparser = argparse.ArgumentParser()
-    argparser.add_argument('--datapath', default='data_expr_july')
+    argparser.add_argument('--datapath', default='data_expr_july', help='must be listed as a key in /config.ini')
     argparser.add_argument('--doms', nargs='*', default=['ADM', 'ATT', 'BER', 'ENR', 'ETN', 'FAC', 'INS', 'MBW', 'STM'])
     argparser.add_argument('--config', default='config.json')
     argparser.add_argument('--model_type', default='roberta')
     argparser.add_argument('--modelpath', default='models')
     argparser.add_argument('--model_name', default='clin_nl_from_scratch')
+    argparser.add_argument('--hf', dest='hugging_face', action='store_true')
+    argparser.set_defaults(hugging_face=False)
+    argparser.add_argument('--clas_unit', default='sent')
+    argparser.add_argument('--train_on', default='train')
+    argparser.add_argument('--eval_on', default='dev', help='only used if `evaluate_during_training` is True in the model args in `config`')
     args = argparser.parse_args()
 
     for dom in args.doms:
-        train_pkl = PATHS.getpath(args.datapath) / f"clf_levels_{dom}_sents/train.pkl"
-        eval_pkl = PATHS.getpath(args.datapath) / f"clf_levels_{dom}_sents/dev.pkl"
-        model_args = f"levels_{dom.lower()}_sents"
+        
+        train_pkl = PATHS.getpath(args.datapath) / f"clf_levels_{dom}_{args.clas_unit}s/{args.train_on}.pkl"
+        eval_pkl = PATHS.getpath(args.datapath) / f"clf_levels_{dom}_{args.clas_unit}s/{args.eval_on}.pkl"
+        model_args = f"levels_{dom.lower()}_{args.clas_unit}s"
+        
+        # model stored locally (default) or on HuggingFace (--hf)
         model_name = str(PATHS.getpath(args.modelpath) / args.model_name)
+        if args.hugging_face:
+            model_name = args.model_name
 
         print(f"TRAINING {model_args}")
         train(
