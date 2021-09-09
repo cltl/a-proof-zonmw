@@ -9,7 +9,7 @@ Save the following outputs per model:
 The script can be customized with the following parameters:
     --datapath: data dir
     --doms: the domains for which models are evaluated
-    --model_type: type of the pre-trained model, e.g. bert, roberta, electra
+    --model_type: type of the fine-tuned model, e.g. bert, roberta, electra
     --modelpath: models dir
     --clas_unit: classification unit ('sent' or 'note')
     --eval_on: name of the file with the eval data

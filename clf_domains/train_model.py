@@ -1,5 +1,20 @@
 """
 Fine-tune and save a multi-label classification model with Simple Transformers.
+
+The script can be customized with the following parameters:
+    --datapath: data dir
+    --train_pkl: the file with the train data
+    --eval_pkl: the file with the eval data
+    --config: json file containing the model args
+    --model_args: the name of the model args dict from `config`
+    --model_type: type of the pre-trained model, e.g. bert, roberta, electra
+    --modelpath: models dir
+    --model_name: the pre-trained model, either from Hugging Face or locally stored
+    --hf: pass this parameter if a model from Hugging Face is used
+
+To change the default values of a parameter, pass it in the command line, e.g.:
+
+$ python train_model.py --model_name pdelobelle/robbert-v2-dutch-base --hf
 """
 
 
@@ -91,10 +106,10 @@ def train(
 if __name__ == '__main__':
 
     argparser = argparse.ArgumentParser()
-    argparser.add_argument('--datapath', default='data_expr_july')
+    argparser.add_argument('--datapath', default='data_expr_july', help='must be listed as a key in /config.ini')
     argparser.add_argument('--train_pkl', default='clf_domains/train.pkl')
-    argparser.add_argument('--eval_pkl', default='clf_domains/dev.pkl')
-    argparser.add_argument('--model_config', default='config.json')
+    argparser.add_argument('--eval_pkl', default='clf_domains/dev.pkl', help='only used if `evaluate_during_training` is True in the model args in `config`')
+    argparser.add_argument('--config', default='config.json')
     argparser.add_argument('--model_args', default='domains_baseline')
     argparser.add_argument('--model_type', default='roberta')
     argparser.add_argument('--modelpath', default='models')
@@ -115,7 +130,7 @@ if __name__ == '__main__':
     train(
         train_pkl,
         eval_pkl,
-        args.model_config,
+        args.config,
         args.model_args,
         args.model_type,
         model_name,

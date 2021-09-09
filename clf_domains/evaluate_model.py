@@ -1,10 +1,23 @@
 """
-Evaluate a fine-tuned multi-label classification model on a test set.
+Evaluate a fine-tuned multi-label classification model on an evaluation set.
 Save the following outputs:
 - evaluation metrics (LRAP, eval_loss):
     saved in a `eval_results.txt` file in the model directory
 - model outputs, wrong predictions:
     saved in the path indicated by the respective parameters
+
+The script can be customized with the following parameters:
+    --datapath: data dir
+    --test_pkl: the file with the eval data
+    --model_type: type of the fine-tuned model, e.g. bert, roberta, electra
+    --modelpath: models dir
+    --model_name: the fine-tuned model, locally stored
+    --model_outputs: path to save the pickled model outputs
+    --wrong_preds: path to save the pickled wrong predictions
+
+To change the default values of a parameter, pass it in the command line, e.g.:
+
+$ python evaluate_model.py --datapath data_expr_sept
 """
 
 
@@ -82,7 +95,7 @@ def evaluate(
 if __name__ == '__main__':
 
     argparser = argparse.ArgumentParser()
-    argparser.add_argument('--datapath', default='data_expr_july')
+    argparser.add_argument('--datapath', default='data_expr_july', help='must be listed as a key in /config.ini')
     argparser.add_argument('--test_pkl', default='clf_domains/test.pkl')
     argparser.add_argument('--model_type', default='roberta')
     argparser.add_argument('--modelpath', default='models')

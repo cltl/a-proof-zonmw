@@ -1,6 +1,17 @@
 """
 Apply a fine-tuned multi-label classification model to generate predictions.
 The text is given in a pickled df and the predictions are generated per row and saved in a 'predictions' column.
+
+The script can be customized with the following parameters:
+    --datapath: data dir
+    --data_pkl: the file with the text
+    --model_type: type of the fine-tuned model, e.g. bert, roberta, electra
+    --modelpath: models dir
+    --model_name: the fine-tuned model, locally stored
+
+To change the default values of a parameter, pass it in the command line, e.g.:
+
+$ python predict.py --datapath data_expr_sept
 """
 
 
@@ -73,7 +84,7 @@ def predict_df(
 if __name__ == '__main__':
 
     argparser = argparse.ArgumentParser()
-    argparser.add_argument('--datapath', default='data_expr_july')
+    argparser.add_argument('--datapath', default='data_expr_july', help='must be listed as a key in /config.ini')
     argparser.add_argument('--data_pkl', default='clf_domains/test.pkl')
     argparser.add_argument('--model_type', default='roberta')
     argparser.add_argument('--modelpath', default='models')
