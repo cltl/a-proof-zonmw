@@ -1,4 +1,4 @@
 Data processing pipeline
 ========================
 
-![data_pipe-zonmw](https://user-images.githubusercontent.com/38586487/129690191-5ba29854-95f2-49d9-b4cf-880318445c4b.png)
+![data_pipe-zonmw](https://user-images.githubusercontent.com/38586487/132900272-e0832fb5-1d0b-4c3c-923c-3bea1feefb35.png)
