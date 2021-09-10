@@ -22,7 +22,6 @@ $ python data_prep_levels.py --doms ATT INS FAC --clas_unit note
 import argparse
 import spacy
 import pandas as pd
-import matplotlib.pyplot as plt
 
 import sys
 sys.path.insert(0, '../..')
