@@ -221,6 +221,10 @@ def main(
     None
     """
 
+    assert eval_on in ['dev', 'test'], "Check your 'eval_on' param; it must be 'test' or 'dev'."
+
+    assert clas_unit in ['sent', 'note'], "Check your 'clas_unit' param; it must be 'sent' or 'note'."
+
     # labels column names
     levels = [f"{domain}_lvl" for domain in domains]
     other = ['target', 'background', 'plus']
@@ -250,15 +254,13 @@ def main(
         text = df.groupby('pad_sen_id').token.apply(lambda s: s.str.cat(sep=' ')).rename('text_raw')
         labels = df.groupby('pad_sen_id')[levels].mean()
         df = pd.concat([info, text, labels], axis=1)
-    elif clas_unit == 'note':
+    else:
         print("Creating note-level df...")
         info_cols = ['institution', 'year', 'MDN', 'NotitieID', 'batch', 'annotator']
         info = df.groupby('NotitieID')[info_cols].first()
         text = df.groupby('NotitieID').token.apply(lambda s: s.str.cat(sep=' ')).rename('text_raw')
         labels = df.groupby('NotitieID')[levels].mean()
         df = pd.concat([info, text, labels], axis=1)
-    else:
-        print("Check your 'clas_unit' param; it must be 'sent' or 'note'.")
 
     # data split
     print("Splitting train / test / dev...")
@@ -284,11 +286,9 @@ def main(
     if eval_on == 'test':
         eval_dom = doms_test
         eval_lvl = test
-    elif eval_on == 'dev':
+    else:
         eval_dom = doms_dev
         eval_lvl = dev
-    else:
-        print("Check your 'eval_on' param; it must be 'test' or 'dev'.")
         
     eval_dom = eval_dom.assign(
         preds = lambda df: df[pred_col].str[0],
