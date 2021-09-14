@@ -25,8 +25,10 @@ from pathlib import Path
 import sys
 sys.path.insert(0, '..')
 from utils.config import PATHS
+from utils.timer import timer
 
 
+@timer
 def predict_df(
     data_pkl,
     model_type,
@@ -69,12 +71,12 @@ def predict_df(
     )
 
     # predict
-    def predict(txt):
-        predictions, _ = model.predict([txt])
-        return predictions
+    print("Generating predictions. This might take a while...")
+    txt = df['text'].to_list()
+    predictions, _ = model.predict(txt)
 
     col = f"pred_{Path(model_name).stem}"
-    df[col] = df['text'].apply(predict)
+    df[col] = predictions
 
     # pkl df
     df.to_pickle(data_pkl)
