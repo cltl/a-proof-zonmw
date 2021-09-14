@@ -3,8 +3,8 @@ from functools import wraps
 
 
 def timer(func):
-    @wraps
-    def wrapper(func, *args, **kwargs):
+    @wraps(func)
+    def wrapper(*args, **kwargs):
         start = time()
         result = func(*args, **kwargs)
         end = time()
