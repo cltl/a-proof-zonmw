@@ -71,12 +71,12 @@ def predict_df(
     )
 
     # predict
-    def predict(txt):
-        predictions, _ = model.predict([txt])
-        return predictions
+    print("Generating predictions. This might take a while...")
+    txt = df['text'].to_list()
+    predictions, _ = model.predict(txt)
 
     col = f"pred_{Path(model_name).stem}"
-    df[col] = df['text'].apply(predict)
+    df[col] = predictions
 
     # pkl df
     df.to_pickle(data_pkl)
