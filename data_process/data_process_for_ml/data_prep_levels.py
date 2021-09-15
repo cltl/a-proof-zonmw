@@ -26,7 +26,7 @@ import pandas as pd
 import sys
 sys.path.insert(0, '../..')
 from utils.config import PATHS
-from utils.data_process import concat_annotated, drop_disregard, fix_week_14, pad_sen_id, anonymize
+from utils.data_process import concat_annotated, drop_disregard, fix_week_14, pad_sen_id, anonymize, flatten_preds_if_necessary
 
 
 def prep_gold_data_for_dom(
@@ -289,11 +289,13 @@ def main(
     else:
         eval_dom = doms_dev
         eval_lvl = dev
-        
-    eval_dom = eval_dom.assign(
-        preds = lambda df: df[pred_col].str[0],
+    
+    eval_dom = eval_dom.pipe(
+        flatten_preds_if_necessary
+    ).assign(
         domains = lambda df: [domains] * len(df),
-    )
+    ).rename(columns={pred_col: 'preds'})
+
     predictions = eval_dom.explode(
         ['domains', 'labels', 'preds']
     )[['pad_sen_id', 'NotitieID', 'annotator', 'domains', 'labels', 'preds']].reset_index()

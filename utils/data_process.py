@@ -4,6 +4,7 @@ Functions used in pre-processing of data for the machine learning pipelines.
 
 
 import pandas as pd
+from pandas.api.types import is_scalar
 from pathlib import Path
 from sklearn.model_selection import GroupShuffleSplit
 
@@ -144,3 +145,17 @@ def data_split_groups(
         test = other.iloc[test_idx]
     
     return train, dev, test
+
+
+def flatten_preds_if_necessary(df):
+    """
+    Flatten predictions if they are a list in a list.
+    This is necessary because of an issue with the predict.py script prior to the update performed on 15-09-2021.
+    """
+    cols = [col for col in df.columns if 'pred' in col]
+    for col in cols:
+        test = df[col].iloc[0]
+        if is_scalar(test[0]):
+            continue
+        df[col] = df[col].str[0]
+    return df
