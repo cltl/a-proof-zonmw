@@ -39,7 +39,7 @@ The csv must follow the following specifications:
 - encoding = utf-8
 - the first row is the header (column names)
 
-See example in [data/input.csv](data/input.csv).
+See example in [example/input.csv](example/input.csv).
 
 # Output file
 The output file is saved in the same location as the input; it has 'output' added to the original file name.
@@ -48,7 +48,7 @@ The output file contains the same columns as the input + 9 new columns with the 
 
 The functioning levels are generated per row. If a cell is empty, it means that this domain is not discussed in this note (according to the algorithm).
 
-See example in [data/input_output.csv](data/input_output.csv).
+See example in [example/input_output.csv](example/input_output.csv).
 
 # Machine Learning Pipeline
 The pipeline includes a multi-label classification model that detects the domains mentioned in a sentence, and 9 regression models that assign a level to sentences in which a specific domain was detected. All models were created by fine-tuning a pre-trained [Dutch medical language model](https://github.com/cltl-students/verkijk_stella_rma_thesis_dutch_medical_langauge_model).
