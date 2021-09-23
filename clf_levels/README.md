@@ -10,7 +10,7 @@ For all the scripts in this repo, the default is that the training/evaluation/pr
 
 This can be configured with the `--doms` and `--clas_unit` arguments, for example:
 ```
-$ python predict.py --doms ADM, ENR --clas_unit note
+$ python predict.py --doms ADM ENR --clas_unit note
 ```
 
 # Training
