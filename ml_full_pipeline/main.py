@@ -127,7 +127,7 @@ def main(
         raise ReadError('The input csv file cannot be read. Please check that it conforms with the required specifications (separator, header, quotechar, encoding).')
 
     if len(df) > 3000:
-        warnings.warn('The csv file contains more than 3,000 rows. This is not recommended since it might cause problems when generating predictions; consider splitting to several smaller files.') 
+        warnings.warn('The csv file contains more than 3,000 rows. This is not recommended since it might cause problems when generating predictions; consider splitting to several smaller files.')
 
     # anonymize
     print(f'Anonymizing the text in "{text_col}" column. This might take a while.')
@@ -163,9 +163,9 @@ def main(
 
 
 if __name__ == '__main__':
-    
+
     argparser = argparse.ArgumentParser()
-    argparser.add_argument('--in_csv', default='./data/input.csv')
+    argparser.add_argument('--in_csv', default='./example/input.csv')
     argparser.add_argument('--text_col', default='text')
     argparser.add_argument('--model_type', default='roberta')
     argparser.add_argument('--models_dir', default='../models')
