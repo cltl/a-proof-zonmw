@@ -57,6 +57,9 @@ def predict_df(
     # check CUDA
     cuda_available = torch.cuda.is_available()
     if not cuda_available:
+        def custom_formatwarning(msg, *args, **kwargs):
+            return str(msg) + '\n'
+        warnings.formatwarning = custom_formatwarning
         warnings.warn('CUDA device not available; running on a CPU!')
 
     # load model

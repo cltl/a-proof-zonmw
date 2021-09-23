@@ -66,6 +66,9 @@ def train(
     # check CUDA
     cuda_available = torch.cuda.is_available()
     if not cuda_available:
+        def custom_formatwarning(msg, *args, **kwargs):
+            return str(msg) + '\n'
+        warnings.formatwarning = custom_formatwarning
         warnings.warn('CUDA device not available; running on a CPU!')
 
     # logging
@@ -115,11 +118,11 @@ if __name__ == '__main__':
     args = argparser.parse_args()
 
     for dom in args.doms:
-        
+
         train_pkl = PATHS.getpath(args.datapath) / f"clf_levels_{dom}_{args.clas_unit}s/{args.train_on}.pkl"
         eval_pkl = PATHS.getpath(args.datapath) / f"clf_levels_{dom}_{args.clas_unit}s/{args.eval_on}.pkl"
         model_args = f"levels_{dom.lower()}_{args.clas_unit}s"
-        
+
         # model stored locally (default) or on HuggingFace (--hf)
         model_name = str(PATHS.getpath(args.modelpath) / args.model_name)
         if args.hugging_face:
