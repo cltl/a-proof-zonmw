@@ -1,7 +1,17 @@
 """
 Select notes for an annotation batch, convert them to CoNLL format and save them in folders per annotator. The overview of the batch is saved as a pickled DataFrame.
 
-The settings for the batch (arguments of the `select_notes` function) are defined in config.batch_prep.json. In addition, you can configure following by passing arguments to the script: (1) the version of the keywords file to use, (2) specific types of notes to select from.
+The script can be customized with the following parameters:
+    --datapath: path to the main directory containing all raw data
+    --kwddir: path to the directory with the keyword files
+    --kwdversion: the version of the keyword file to use
+    --in_annot: list of paths to batch pkl's that are currently in annotation and haven't been processed yet; these notes are excluded from the selection, in addition to already annotated and processed notes
+    --note_types: list of note types to select; if None, all note types are selected
+    --batch: the name of the batch, as listed in the `config.batch_prep.json` file
+
+To change the default values of a parameter, pass it in the command line, e.g.:
+
+$ python prep_batch_for_annotation.py --note_types Consulten (niet-arts)
 """
 
 
