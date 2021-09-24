@@ -68,6 +68,9 @@ def train(
     # check CUDA
     cuda_available = torch.cuda.is_available()
     if not cuda_available:
+        def custom_formatwarning(msg, *args, **kwargs):
+            return str(msg) + '\n'
+        warnings.formatwarning = custom_formatwarning
         warnings.warn('CUDA device not available; running on a CPU!')
 
     # logging
@@ -117,12 +120,12 @@ if __name__ == '__main__':
 
     train_pkl = PATHS.getpath(args.datapath) / args.train_pkl
     eval_pkl = PATHS.getpath(args.datapath) / args.eval_pkl
-    
+
     # model stored locally (default) or on HuggingFace (--hf)
     model_name = str(PATHS.getpath(args.modelpath) / args.model_name)
     if args.hugging_face:
         model_name = args.model_name
-    
+
 
     train(
         train_pkl,
