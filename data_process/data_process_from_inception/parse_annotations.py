@@ -2,6 +2,17 @@
 Process a pickled DataFrame of annotations so that the labels assigned by the annotators (`label` column) are parsed into separate columns (e.g. `ENR`, `ENR_lvl`, 'background', etc.). Save the resulting parsed DataFrame in pkl format.
 
 The input pickled DataFrame is created from a batch of annotated tsv files with the script `process_annotated.py`.
+
+The script can be customized with the following parameters:
+    --rsrcpath: path to the directory where the tagset files are stored
+    --tagset: the tagset file to use
+    --datapath: path to the main directory containing the batches
+    --infile: path to the input pkl
+    --outfile: path to the output pkl
+
+To change the default values of a parameter, pass it in the command line, e.g.:
+
+$ python parse_annotations.py --tagset tagset_legacy_stella.json
 """
 
 

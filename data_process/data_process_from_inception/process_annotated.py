@@ -3,23 +3,18 @@ Process a batch of annotated tsv files (INCEpTION output).
 Save the resulting DataFrame in pkl format.
 Update the register of annotated notes ID's so that the notes are excluded from future selections.
 
-USAGE EXAMPLE:
-    python process_annotated.py
-        --batch_dir mydirectory/
-        --outfile mydf.pkl
+The script can be customized with the following parameters:
+    --datapath: path to the main directory containing the batches
+    --batch_dir: path to the directory with the annotated batch files
+    --outfile: filename for the output pkl
+    --no_update: if passed, the register of annotated notes is not updated with the current note ID's
+    --annotfile: path to the register of already annotated notes ID's
+    --legacy_parser: name of legacy parser, if needed
+    --path_to_raw: only for legacy_marten; path to the raw data csv file
 
-USAGE EXAMPLE LEGACY STELLA (see naming convention below):
-    python process_annotated.py
-        --batch_dir mydirectory/
-        --outfile mydf.pkl
-        --legacy_parser legacy_stella
+To change the default values of a parameter, pass it in the command line, e.g.:
 
-USAGE EXAMPLE LEGACY MARTEN (see naming convention below):
-    python process_annotated.py
-        --batch_dir mydirectory/
-        --outfile mydf.pkl
-        --legacy_parser legacy_marten
-        --path_to_raw ../mydir/raw/notities2017.csv
+$ python process_annotated.py --no_update
 """
 
 
