@@ -43,7 +43,7 @@ The repo is organized as follows:
 - `resources`: annotation gudelines, files used for configuring the annotation environment, files for keyword searches in the data.
 - `utils`: general helper functions used throughout the repo.
 
-For details, please refer to the READMEs in the individual directories.
+For details, please refer to the READMEs in the individual directories. A report can be found in the doc folder.
 
 # Configuring and calling paths
 - All paths that are used in the code of this repo are listed in [config.ini](config.ini).
